@@ -1,0 +1,18 @@
+# cat=basic/Enable Binaries/100; type=boolean; label=Use optipng:For optimization of PNG files
+enableOptipng = 1
+# cat=basic/Enable Binaries/200; type=boolean; label=Use jpegtran:For optimization of JPG files
+enableJpegtran = 1
+
+# cat=basic/Enable Features/300; type=boolean; label=Optimize files on upload: This is useful when you reference original files from fileadmin which don't need to be processed
+optimizeOnUpload = 1
+# cat=basic/Enable Features/400; type=boolean; label=Optimize files after processing: Optimize files which are processed (cropped, scaled, ...).
+optimizeAfterProcessing = 1
+
+# cat=basic/optipng/500; type=integer; label=Optipng Optimization level (1 - 7):1 = fastest, 2 = default, 7 = slowest
+optipngOptimizationLevel = 2
+
+# cat=basic/jpegtran/600; type=boolean; label=Suppress all comments and other excess baggage present in jpg's on upload
+jpegtranStripMarker = 1
+
+# cat=basic/debug/1000; type=boolean; label=Enable Debugging:The output goes to backend log module when you are logged in
+debug = 0
