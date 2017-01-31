@@ -5,7 +5,7 @@ Lossless jpg/png image optimization with optipng and jpegtran.
 ## Features
 
 * Optimize images on upload
-* Optimize png images after processing (files in `fileadmin/_processed_/`)
+* Optimize images after processing (files in `fileadmin/_processed_/`)
 
 ## Installation
 
