@@ -27,6 +27,7 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface {
 	public function getStatus() {
 		$status['optipng'] = $this->checkBinary('optipng');
 		$status['jpegtran'] = $this->checkBinary('jpegtran');
+		$status['jpegoptim'] = $this->checkBinary('jpegoptim');
 
 		return $status;
 	}

@@ -1,6 +1,6 @@
 # TYPO3 ImageOptimizer Extension
 
-Lossless jpg/png image optimization with optipng and jpegtran.
+Lossless jpg/png image optimization with optipng, jpegtran and jpegoptim.
 
 ## Features
 
@@ -9,9 +9,9 @@ Lossless jpg/png image optimization with optipng and jpegtran.
 
 ## Installation
 
-You need optipng and jpegtran on the server.
+You need optipng, jpegtran and jpegoptim on the server.
 
-Debian/Ubuntu: `apt-get install optipng libjpeg-turbo-progs`
+Debian/Ubuntu: `apt-get install optipng libjpeg-turbo-progs jpegoptim`
 
 ## Configuration options
 

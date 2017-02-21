@@ -42,6 +42,14 @@ class OptimizeImageService {
 				$stripMarker = $fileIsUploaded === TRUE && (bool)$this->configuration['jpegtranStripMarker'] === FALSE ? '' : ' -copy none';
 				$command = sprintf('%s -optimize %s -outfile %s %s 2>&1', $binary, $stripMarker, $file, $file);
 			}
+
+		} elseif (($extension == 'jpg' || $extension == 'jpeg') && (bool)$this->configuration['enableJpegoptim'] === TRUE) {
+			$binary = CommandUtility::getCommand('jpegoptim');
+			if (is_string($binary)) {
+				$jpegoptimQuality = (integer)$this->configuration['jpegoptimQuality'];
+				$quality = $fileIsUploaded === TRUE && ($jpegoptimQuality > 0 && $jpegoptimQuality <= 100) ? $jpegoptimQuality : 90;
+				$command = sprintf('%s -m %s -s --all-progressiv %s 2>&1', $binary, $quality, $file);
+			}
 		}
 
 		if (isset($command)) {

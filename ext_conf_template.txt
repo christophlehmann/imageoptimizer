@@ -2,6 +2,8 @@
 enableOptipng = 1
 # cat=basic/Enable Binaries/200; type=boolean; label=Use jpegtran:For optimization of JPG files
 enableJpegtran = 1
+# cat=basic/Enable Binaries/250; type=boolean; label=Use jpegoptim:For optimization of JPG files
+enableJpegoptim = 1
 
 # cat=basic/Enable Features/300; type=boolean; label=Optimize files on upload: This is useful when you reference original files from fileadmin which don't need to be processed
 optimizeOnUpload = 1
@@ -13,6 +15,9 @@ optipngOptimizationLevel = 2
 
 # cat=basic/jpegtran/600; type=boolean; label=Suppress all comments and other excess baggage present in jpg's on upload
 jpegtranStripMarker = 1
+
+# cat=basic/jpegoptim/700; type=integer; label=Set maximum image quality factor (disables lossless optimization mode, which is by default on). Valid quality values: 0 - 100
+jpegoptimQuality = 90
 
 # cat=basic/debug/1000; type=boolean; label=Enable Debugging:The output goes to backend log module when you are logged in
 debug = 0
