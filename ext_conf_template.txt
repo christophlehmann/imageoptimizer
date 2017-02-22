@@ -19,5 +19,8 @@ jpegtranStripMarker = 1
 # cat=basic/jpegoptim/700; type=integer; label=Set maximum image quality factor (disables lossless optimization mode, which is by default on). Valid quality values: 0 - 100
 jpegoptimQuality = 90
 
+# cat=basic/jpegtran/750; type=boolean; label=Suppress all comments and other excess baggage present in jpg's on upload
+jpegoptimStripMarker = 1
+
 # cat=basic/debug/1000; type=boolean; label=Enable Debugging:The output goes to backend log module when you are logged in
 debug = 0
