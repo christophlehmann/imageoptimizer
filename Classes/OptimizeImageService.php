@@ -32,7 +32,7 @@ class OptimizeImageService {
 		if ($extension == 'png' && (bool)$this->configuration['enableOptipng'] === TRUE) {
 			$binary = CommandUtility::getCommand('optipng');
 			if (is_string($binary)) {
-				$level = MathUtility::forceIntegerInRange($this->configuration['optipngOptimizationLevel'],1,7,2);
+				$level = MathUtility::forceIntegerInRange($this->configuration['optipngOptimizationLevel'], 1, 7, 2);
 				$command = sprintf($binary . ' -o%u %s 2>&1', $level, $file);
 			}
 
@@ -46,10 +46,9 @@ class OptimizeImageService {
 		} elseif (($extension == 'jpg' || $extension == 'jpeg') && (bool)$this->configuration['enableJpegoptim'] === TRUE) {
 			$binary = CommandUtility::getCommand('jpegoptim');
 			if (is_string($binary)) {
-				$jpegoptimQuality = (integer)$this->configuration['jpegoptimQuality'];
-				$quality = ($jpegoptimQuality > 0 && $jpegoptimQuality <= 100) ? $jpegoptimQuality : 90;
+				$quality = $fileIsUploaded === TRUE ? 100 : MathUtility::forceIntegerInRange($this->configuration['jpegoptimQuality'], 1, 100, 90); 
 				$stripMarker = $fileIsUploaded === TRUE && (bool)$this->configuration['jpegoptimStripMarker'] === FALSE ? '' : ' --strip-all';
-				$command = sprintf('%s -m %s %s --all-progressive %s 2>&1', $binary, $quality, $stripMarker, $file);
+				$command = sprintf('%s --max=%s %s --all-progressive %s 2>&1', $binary, $quality, $stripMarker, $file);
 			}
 		}
 
