@@ -48,7 +48,7 @@ class OptimizeImageService {
 			if (is_string($binary)) {
 				$jpegoptimQuality = (integer)$this->configuration['jpegoptimQuality'];
 				$quality = $fileIsUploaded === TRUE && ($jpegoptimQuality > 0 && $jpegoptimQuality <= 100) ? $jpegoptimQuality : 90;
-				$command = sprintf('%s -m %s -s --all-progressiv %s 2>&1', $binary, $quality, $file);
+				$command = sprintf('%s -m %s -s --all-progressive %s 2>&1', $binary, $quality, $file);
 			}
 		}
 
