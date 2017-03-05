@@ -1,10 +1,14 @@
 {
   "name": "christophlehmann/imageoptimizer",
   "type": "typo3-cms-extension",
-  "description": "TYPO3 extension for lossless jpg/png image optimization with optipng and jpegtran.",
+  "description": "Optimize uploaded/processed images with binaries of your choice",
   "keywords": [
     "TYPO3",
-    "extension"
+    "extension",
+    "optipng",
+    "jpegoptim",
+    "lossless",
+    "progressive"
   ],
   "require": {
     "typo3/cms-core": ">=6.2.0,<8.9.99"

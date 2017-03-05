@@ -14,8 +14,7 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface {
 	/**
 	 * Default constructor
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
 	}
 
@@ -25,29 +24,21 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface {
 	 * @return array List of statuses
 	 */
 	public function getStatus() {
-		$status['optipng'] = $this->checkBinary('optipng');
-		$status['jpegtran'] = $this->checkBinary('jpegtran');
+		$configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['imageoptimizer']);
+		$extensions = ['jpg', 'png', 'gif', 'svg'];
+		foreach ($extensions as $extension) {
+			$binary = escapeshellcmd($configuration[$extension . 'Binary']);
+			$binaryFound = is_string(CommandUtility::getCommand($binary));
+			$binaryUsed = ((bool)($configuration[$extension . 'OnUpload']) === TRUE || (bool)($configuration[$extension . 'OnProcessing']) === TRUE);
 
-		return $status;
-	}
-
-	/**
-	 * Check if binary is found
-	 *
-	 * @return \TYPO3\CMS\Reports\Status
-	 */
-	protected function checkBinary($name) {
-		$binary = CommandUtility::getCommand($name);
-
-		/** @var $status \TYPO3\CMS\Reports\Status */
-		$status = $this->objectManager->get(
-			Status::class,
-			$name . ' executable',
-			is_string($binary) ? 'Found: ' . $binary : 'Not found',
-			'',
-			is_string($binary) ? Status::OK : Status::ERROR
-		);
-
+			$status[$extension] = $this->objectManager->get(
+				Status::class,
+				'Binary ' . $binary,
+				$binaryFound ? 'Found' : 'Not found',
+				$binaryUsed ? 'In use' : 'Not in use',
+				$binaryFound || $binaryUsed === FALSE ? Status::OK : Status::ERROR
+			);
+		}
 		return $status;
 	}
 }

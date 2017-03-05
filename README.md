@@ -1,24 +1,23 @@
 # TYPO3 ImageOptimizer Extension
 
-Lossless jpg/png image optimization with optipng and jpegtran.
+Lossless image optimization. Process jpg/png/gif/svg images with binaries and parameters of your choice.
 
 ## Features
 
-* Optimize images on upload
-* Optimize images after processing (files in `fileadmin/_processed_/`)
+* Optimize images on upload or after processing (files in `fileadmin/_processed_/`)
+* Binaries, paths and their parameters are configurable
 
 ## Installation
 
-You need optipng and jpegtran on the server.
+Debian/Ubuntu: `apt-get install optipng libjpeg-turbo-progs gifsicle`
 
-Debian/Ubuntu: `apt-get install optipng libjpeg-turbo-progs`
+svgo is installable via NPM `npm install -g svgo`
 
 ## Configuration options
 
-See [here](ext_conf_template.txt)
+![Extension Manager configuration options](https://raw.githubusercontent.com/christophlehmann/imageoptimizer/master/Documentation/configuration.png)
 
 ## Debugging
 
-There is a report in the backend report module. When the binaries are not found try to adapt `$GLOBALS['TYPO3_CONF_VARS']['SYS']['binpath']`
-
-There is a also a debugging option in the Extension Manager configuration.
+* Check the backend report module. When the binaries are not found try to adapt their bin path in the Extension Manager.
+* Activate the debugging option in the Extension Manager. Full commands are then logged to the log module.

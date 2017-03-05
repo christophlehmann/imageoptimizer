@@ -1,18 +1,46 @@
-# cat=basic/Enable Binaries/100; type=boolean; label=Use optipng:For optimization of PNG files
-enableOptipng = 1
-# cat=basic/Enable Binaries/200; type=boolean; label=Use jpegtran:For optimization of JPG files
-enableJpegtran = 1
+# cat=jpg/Binary/2000; type=string; label=Path to binary
+jpgBinary = jpegoptim
+# cat=jpg/Upload/2010; type=boolean; label=Activate for upload
+jpgOnUpload = 0
+# cat=jpg/Processing/2020; type=boolean; label=Activate for processing (after crop,scale, ...)
+jpgOnProcessing = 0
+# cat=jpg/Upload/2030; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
+jpgParametersOnUpload = --strip-all %s
+# cat=jpg/Processing/2040; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
+jpgParametersOnProcessing = --strip-all %s
 
-# cat=basic/Enable Features/300; type=boolean; label=Optimize files on upload: This is useful when you reference original files from fileadmin which don't need to be processed
-optimizeOnUpload = 1
-# cat=basic/Enable Features/400; type=boolean; label=Optimize files after processing: Optimize files which are processed (cropped, scaled, ...).
-optimizeAfterProcessing = 1
+# cat=png/Binary/2100; type=string; label=Path to binary
+pngBinary = optipng
+# cat=png/Upload/2110; type=boolean; label=Activate for upload
+pngOnUpload = 0
+# cat=png/Processing/2120; type=boolean; label=Activate for processing (after crop,scale, ...)
+pngOnProcessing = 0
+# cat=png/Upload/2130; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
+pngParametersOnUpload = -o2 %s
+# cat=png/Processing/2040; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
+pngParametersOnProcessing = -o2 %s
 
-# cat=basic/optipng/500; type=integer; label=Optipng Optimization level (1 - 7):1 = fastest, 2 = default, 7 = slowest
-optipngOptimizationLevel = 2
+# cat=gif/Binary/2200; type=string; label=Path to binary
+gifBinary = gifsicle
+# cat=gif/Upload/2210; type=boolean; label=Activate for upload
+gifOnUpload = 0
+# cat=gif/Processing/2220; type=boolean; label=Activate for processing (after crop,scale, ...)
+gifOnProcessing = 0
+# cat=gif/Upload/2230; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
+gifParametersOnUpload = --batch -O2 %s
+# cat=gif/Processing/2240; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
+gifParametersOnProcessing = --batch -O2 %s
 
-# cat=basic/jpegtran/600; type=boolean; label=Suppress all comments and other excess baggage present in jpg's on upload
-jpegtranStripMarker = 1
+# cat=svg/Binary/2300; type=string; label=Path to binary
+svgBinary = svgo
+# cat=svg/Upload/2310; type=boolean; label=Activate for upload
+svgOnUpload = 0
+# cat=svg/Processing/2320; type=boolean; label=Activate for processing (after crop,scale, ...)
+svgOnProcessing = 0
+# cat=svg/Upload/2330; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
+svgParametersOnUpload = --pretty %s
+# cat=svg/Processing/2040; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
+svgParametersOnProcessing = --pretty %s
 
-# cat=basic/debug/1000; type=boolean; label=Enable Debugging:The output goes to backend log module when you are logged in
+# cat=Debug/debug/1000; type=boolean; label=Enable Debugging:The output goes to backend log module when you are logged in
 debug = 0

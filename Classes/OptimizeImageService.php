@@ -2,7 +2,6 @@
 namespace Lemming\Imageoptimizer;
 
 use TYPO3\CMS\Core\Utility\CommandUtility;
-use TYPO3\CMS\Core\Utility\MathUtility;
 
 class OptimizeImageService {
 
@@ -28,29 +27,31 @@ class OptimizeImageService {
 			}
 		}
 		$extension = strtolower($extension);
+		if ($extension == 'jpeg') {
+			$extension = 'jpg';
+		}
+		$when = $fileIsUploaded === TRUE ? 'Upload' : 'Processing';
 
-		if ($extension == 'png' && (bool)$this->configuration['enableOptipng'] === TRUE) {
-			$binary = CommandUtility::getCommand('optipng');
-			if (is_string($binary)) {
-				$level = MathUtility::forceIntegerInRange($this->configuration['optipngOptimizationLevel'],1,7,2);
-				$command = sprintf($binary . ' -o%u %s 2>&1', $level, $file);
-			}
-
-		} elseif (($extension == 'jpg' || $extension == 'jpeg') && (bool)$this->configuration['enableJpegtran'] === TRUE) {
-			$binary = CommandUtility::getCommand('jpegtran');
-			if (is_string($binary)) {
-				$stripMarker = $fileIsUploaded === TRUE && (bool)$this->configuration['jpegtranStripMarker'] === FALSE ? '' : ' -copy none';
-				$command = sprintf('%s -optimize %s -outfile %s %s 2>&1', $binary, $stripMarker, $file, $file);
-			}
+		if ((bool)$this->configuration[$extension . 'On' . $when] === FALSE) {
+			return;
 		}
 
-		if (isset($command)) {
-			$output = [];
-			$returnValue = 0;
-			CommandUtility::exec($command, $output, $returnValue);
-			if ((bool)$this->configuration['debug'] === TRUE && is_object($GLOBALS['BE_USER'])) {
-				$GLOBALS['BE_USER']->writelog(4, 0, 0, 1467124014, $command . ' exited with ' . $returnValue . '. Output was: ' . implode(' ', $output), $output);
-			}
+		$binary = CommandUtility::getCommand(escapeshellcmd($this->configuration[$extension . 'Binary']));
+
+		if (!is_string($binary)) {
+			throw new \RuntimeException('Binary ' . $binary . ' not found', 1488631746);
+		}
+
+		$parameters = $this->configuration[$extension . 'ParametersOn' . $when];
+		$parameters = preg_replace('/[^A-Za-z0-9-% ]/', "", $parameters);
+		$parameters = preg_replace('/%s/', $file, $parameters);
+
+		$command = $binary . ' ' . $parameters . ' 2>&1';
+		$output = [];
+		$returnValue = 0;
+		CommandUtility::exec($command, $output, $returnValue);
+		if ((bool)$this->configuration['debug'] === TRUE && is_object($GLOBALS['BE_USER'])) {
+			$GLOBALS['BE_USER']->writelog(4, 0, 0, 1467124014, $command . ' exited with ' . $returnValue . '. Output was: ' . implode(' ', $output), $output);
 		}
 	}
 }
