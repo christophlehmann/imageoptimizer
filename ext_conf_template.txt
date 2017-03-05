@@ -35,12 +35,8 @@ gifParametersOnProcessing = --batch -O2 %s
 svgBinary = svgo
 # cat=svg/Upload/2310; type=boolean; label=Activate for upload
 svgOnUpload = 0
-# cat=svg/Processing/2320; type=boolean; label=Activate for processing (after crop,scale, ...)
-svgOnProcessing = 0
 # cat=svg/Upload/2330; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
 svgParametersOnUpload = --pretty %s
-# cat=svg/Processing/2040; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
-svgParametersOnProcessing = --pretty %s
 
 # cat=Debug/debug/1000; type=boolean; label=Enable Debugging:The output goes to backend log module when you are logged in
 debug = 0
