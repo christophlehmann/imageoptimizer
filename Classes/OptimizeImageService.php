@@ -27,6 +27,9 @@ class OptimizeImageService {
 			}
 		}
 		$extension = strtolower($extension);
+		if ($extension == 'jpeg') {
+			$extension = 'jpg';
+		}
 		$when = $fileIsUploaded === TRUE ? 'Upload' : 'Processing';
 
 		if ((bool)$this->configuration[$extension . 'On' . $when] === FALSE) {
