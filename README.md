@@ -10,8 +10,6 @@ Lossless jpg/png image optimization. Process jpg/png/gif/svg with binaries and p
 
 ## Installation
 
-You need optipng and jpegoptim on the server.
-
 Debian/Ubuntu: `apt-get install optipng libjpeg-turbo-progs gifsicle`
 
 svgo is installable via NPM `npm install -g svgo`
@@ -22,6 +20,5 @@ svgo is installable via NPM `npm install -g svgo`
 
 ## Debugging
 
-There is a report in the backend report module. When the binaries are not found try to adapt `$GLOBALS['TYPO3_CONF_VARS']['SYS']['binpath']`
-
-There is a also a debugging option in the Extension Manager configuration.
+* Check the backend report module. When the binaries are not found try to adapt their bin path in the Extension Manager.
+* Activate the debugging option in the Extension Manager. Full commands are then logged to the log module.
