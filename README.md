@@ -1,12 +1,11 @@
 # TYPO3 ImageOptimizer Extension
 
-Lossless jpg/png image optimization. Process jpg/png/gif/svg with binaries and parameters of your choice.
+Lossless image optimization. Process jpg/png/gif/svg images with binaries and parameters of your choice.
 
 ## Features
 
 * Optimize images on upload or after processing (files in `fileadmin/_processed_/`)
 * Binaries, paths and their parameters are configurable
-* Supported image formats: jpg, png, gif, svg
 
 ## Installation
 
