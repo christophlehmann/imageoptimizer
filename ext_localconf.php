@@ -2,6 +2,10 @@
 
 $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['imageoptimizer']);
 
+if (!isset($signalSlotDispatcher)) {
+	$signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\SignalSlot\Dispatcher');
+}
+
 if ((isset($configuration['jpgOnUpload']) && (bool)$configuration['jpgOnUpload'] === TRUE) ||
 	(isset($configuration['pngOnUpload']) && (bool)$configuration['pngOnUpload'] === TRUE) ||
 	(isset($configuration['gifOnUpload']) && (bool)$configuration['gifOnUpload'] === TRUE) ||
