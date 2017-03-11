@@ -2,7 +2,10 @@
 
 $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['imageoptimizer']);
 
-if (isset($configuration['optimizeOnUpload']) && (bool)$configuration['optimizeOnUpload'] === TRUE) {
+if ((isset($configuration['jpgOnUpload']) && (bool)$configuration['jpgOnUpload'] === TRUE) ||
+	(isset($configuration['pngOnUpload']) && (bool)$configuration['pngOnUpload'] === TRUE) ||
+	(isset($configuration['gifOnUpload']) && (bool)$configuration['gifOnUpload'] === TRUE) ||
+	(isset($configuration['svgOnUpload']) && (bool)$configuration['svgOnUpload'] === TRUE)) {
 	$signalSlotDispatcher->connect(
 		'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
 		\TYPO3\CMS\Core\Resource\ResourceStorage::SIGNAL_PreFileAdd,
@@ -18,7 +21,9 @@ if (isset($configuration['optimizeOnUpload']) && (bool)$configuration['optimizeO
 	);
 }
 
-if (isset($configuration['optimizeAfterProcessing']) && (bool)$configuration['optimizeAfterProcessing'] === TRUE) {
+if ((isset($configuration['jpgOnProcessing']) && (bool)$configuration['jpgOnProcessing'] === TRUE) ||
+	(isset($configuration['pngOnProcessing']) && (bool)$configuration['pngOnProcessing'] === TRUE) ||
+	(isset($configuration['gifOnProcessing']) && (bool)$configuration['gifOnProcessing'] === TRUE)) {
 	$signalSlotDispatcher->connect(
 		'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
 		\TYPO3\CMS\Core\Resource\Service\FileProcessingService::SIGNAL_PostFileProcess,
