@@ -9,7 +9,7 @@ Lossless image optimization. Process jpg/png/gif/svg images with binaries and pa
 
 ## Installation
 
-Debian/Ubuntu: `apt-get install optipng libjpeg-turbo-progs gifsicle`
+Debian/Ubuntu: `apt-get install optipng jpegoptim libjpeg-turbo-progs gifsicle`
 
 svgo is installable via NPM `npm install -g svgo`
 
