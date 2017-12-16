@@ -21,3 +21,7 @@ svgo is installable via NPM `npm install -g svgo`
 
 * Check the backend report module. When the binaries are not found try to adapt their bin path in the Extension Manager.
 * Activate the debugging option in the Extension Manager. Full commands are then logged to the log module.
+
+## Need Help?
+
+Join the Slack channel `#ext-imageoptimizer` @ https://forger.typo3.com/slack
