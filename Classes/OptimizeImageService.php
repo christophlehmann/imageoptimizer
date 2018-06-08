@@ -39,6 +39,9 @@ class OptimizeImageService {
 		$binary = CommandUtility::getCommand(escapeshellcmd($this->configuration[$extension . 'Binary']));
 
 		if (!is_string($binary)) {
+			if ((bool)$this->configuration['debug'] === TRUE && is_object($GLOBALS['BE_USER'])) {
+				$GLOBALS['BE_USER']->writelog(4, 0, 1, 0, 'Binary "' . $binary . '" not found' );
+			}
 			throw new \RuntimeException('Binary ' . $binary . ' not found', 1488631746);
 		}
 
