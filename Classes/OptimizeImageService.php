@@ -2,6 +2,7 @@
 namespace Lemming\Imageoptimizer;
 
 use TYPO3\CMS\Core\Utility\CommandUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class OptimizeImageService {
 
@@ -54,5 +55,7 @@ class OptimizeImageService {
 			$error = $returnValue == 0 ? 0 : 1;
 			$GLOBALS['BE_USER']->writelog(4, 0, $error, 0, $command . ' exited with ' . $returnValue . '. Output was: ' . implode(' ', $output), $output);
 		}
+		
+		GeneralUtility::fixPermissions($file);
 	}
 }
