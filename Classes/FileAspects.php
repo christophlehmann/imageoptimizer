@@ -1,6 +1,7 @@
 <?php
 namespace Lemming\Imageoptimizer;
 
+use TYPO3\CMS\Core\Resource\ProcessedFileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class FileAspects
@@ -49,9 +50,13 @@ class FileAspects
      */
     public function processFile($fileProcessingService, $driver, $processedFile)
     {
-        if ($processedFile->isUpdated() === true) {
-            // ToDo: Find better possibility for getPublicUrl()
-            $this->service->process(PATH_site . $processedFile->getPublicUrl(), $processedFile->getExtension());
+        if ($processedFile->usesOriginalFile() === true || $processedFile->isUpdated() === true) {
+            $fileForLocalProcessing = $processedFile->getForLocalProcessing();
+            $this->service->process($fileForLocalProcessing, $processedFile->getExtension());
+            $processedFile->updateWithLocalFile($fileForLocalProcessing);
+
+            $processedFileRepository = GeneralUtility::makeInstance(ProcessedFileRepository::class);
+            $processedFileRepository->add($processedFile);
         }
     }
 }
