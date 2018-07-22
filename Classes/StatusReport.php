@@ -1,6 +1,7 @@
 <?php
 namespace Lemming\Imageoptimizer;
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -29,7 +30,7 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface
      */
     public function getStatus()
     {
-        $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['imageoptimizer']);
+        $configuration = $this->objectManager->get(ExtensionConfiguration::class)->get('imageoptimizer');
         $extensions = ['jpg', 'png', 'gif', 'svg'];
         foreach ($extensions as $extension) {
             $binary = escapeshellcmd($configuration[$extension . 'Binary']);
