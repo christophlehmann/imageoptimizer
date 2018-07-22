@@ -19,8 +19,8 @@ svgo is installable via NPM `npm install -g svgo`
 
 ## Debugging
 
-* Check the backend report module. When the binaries are not found try to adapt their bin path in the Extension Manager.
-* Activate the debugging option in the Extension Manager. Full commands are then logged to the log module.
+* Commands are tested in Extension Manager
+* Logging API: See file/database log
 
 ## Need Help?
 

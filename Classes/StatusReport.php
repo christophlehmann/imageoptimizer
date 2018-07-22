@@ -2,6 +2,8 @@
 namespace Lemming\Imageoptimizer;
 
 use TYPO3\CMS\Core\Utility\CommandUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Reports\Status;
 
 class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface
@@ -17,7 +19,7 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface
      */
     public function __construct()
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
     }
 
     /**
@@ -37,7 +39,7 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface
             $status[$extension] = $this->objectManager->get(
                 Status::class,
                 'Binary ' . $binary,
-                $binaryFound ? 'Found' : 'Not found',
+                $binaryFound ? 'Found' : OptimizeImageService::BINARY_NOT_FOUND,
                 $binaryUsed ? 'In use' : 'Not in use',
                 $binaryFound || $binaryUsed === false ? Status::OK : Status::ERROR
             );

@@ -1,4 +1,4 @@
-# cat=jpg/Binary/2000; type=string; label=Path to binary
+# cat=jpg/Binary/2000; type=string; label=Binary
 jpgBinary = jpegoptim
 # cat=jpg/Upload/2010; type=boolean; label=Activate for upload
 jpgOnUpload = 0
@@ -8,8 +8,10 @@ jpgOnProcessing = 0
 jpgParametersOnUpload = --strip-all %s
 # cat=jpg/Processing/2040; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
 jpgParametersOnProcessing = --strip-all %s
+# cat=jpg/check/2050; type=user[EXT:imageoptimizer/Classes/ConfigurationTest.php:Lemming\Imageoptimizer\ConfigurationTest->testCommand]; label=Test commands
+jpgCheck = jpg
 
-# cat=png/Binary/2100; type=string; label=Path to binary
+# cat=png/Binary/2100; type=string; label=Binary
 pngBinary = optipng
 # cat=png/Upload/2110; type=boolean; label=Activate for upload
 pngOnUpload = 0
@@ -17,10 +19,12 @@ pngOnUpload = 0
 pngOnProcessing = 0
 # cat=png/Upload/2130; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
 pngParametersOnUpload = -o2 %s
-# cat=png/Processing/2040; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
+# cat=png/Processing/2140; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
 pngParametersOnProcessing = -o2 %s
+# cat=png/check/2150; type=user[EXT:imageoptimizer/Classes/ConfigurationTest.php:Lemming\Imageoptimizer\ConfigurationTest->testCommand]; label=Test commands
+pngCheck = png
 
-# cat=gif/Binary/2200; type=string; label=Path to binary
+# cat=gif/Binary/2200; type=string; label=Binary
 gifBinary = gifsicle
 # cat=gif/Upload/2210; type=boolean; label=Activate for upload
 gifOnUpload = 0
@@ -30,13 +34,14 @@ gifOnProcessing = 0
 gifParametersOnUpload = --batch -O2 %s
 # cat=gif/Processing/2240; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
 gifParametersOnProcessing = --batch -O2 %s
+# cat=gif/check/2250; type=user[EXT:imageoptimizer/Classes/ConfigurationTest.php:Lemming\Imageoptimizer\ConfigurationTest->testCommand]; label=Test commands
+gifCheck = gif
 
-# cat=svg/Binary/2300; type=string; label=Path to binary
+# cat=svg/Binary/2300; type=string; label=Binary
 svgBinary = svgo
 # cat=svg/Upload/2310; type=boolean; label=Activate for upload
 svgOnUpload = 0
 # cat=svg/Upload/2330; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
 svgParametersOnUpload = --pretty %s
-
-# cat=Debug/debug/1000; type=boolean; label=Enable Debugging:The output goes to backend log module when you are logged in
-debug = 0
+# cat=svg/check/2340; type=user[EXT:imageoptimizer/Classes/ConfigurationTest.php:Lemming\Imageoptimizer\ConfigurationTest->testCommand]; label=Test commands
+svgCheck = svg

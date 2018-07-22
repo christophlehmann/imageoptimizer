@@ -1,11 +1,31 @@
 <?php
 namespace Lemming\Imageoptimizer;
 
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Log\Logger;
+use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class OptimizeImageService
 {
+
+    const BINARY_NOT_FOUND = 'The Binary was not found in $PATH. $GLOBALS[\'TYPO3_CONF_VARS\'][\'SYS\'][\'binSetup\'] may help you. Good luck!';
+
+    /**
+     * @var string
+     */
+    protected $command;
+
+    /**
+     * @var array
+     */
+    protected $output = [];
+
+    /**
+     * @var Logger
+     */
+    protected $logger;
 
     /**
      * Initialize
@@ -13,6 +33,8 @@ class OptimizeImageService
     public function __construct()
     {
         $this->configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['imageoptimizer']);
+        $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
+
     }
 
     /**
@@ -21,9 +43,14 @@ class OptimizeImageService
      * @param string $file
      * @param string $extension
      * @param bool $fileIsUploaded
+     * @param bool $testMode
+     * @throws BinaryNotFoundException
+     * @return bool
      */
-    public function process($file, $extension = null, $fileIsUploaded = false)
+    public function process($file, $extension = null, $fileIsUploaded = false, $testMode = false)
     {
+        $this->reset();
+
         if ($extension === null) {
             $pathinfo = pathinfo($file);
             if ($pathinfo['extension'] !== null) {
@@ -36,30 +63,74 @@ class OptimizeImageService
         }
         $when = $fileIsUploaded === true ? 'Upload' : 'Processing';
 
-        if ((bool)$this->configuration[$extension . 'On' . $when] === false) {
+        if ((bool)$this->configuration[$extension . 'On' . $when] === false && $testMode === false) {
             return;
         }
 
         $binary = CommandUtility::getCommand(escapeshellcmd($this->configuration[$extension . 'Binary']));
 
         if (!is_string($binary)) {
-            throw new \RuntimeException('Binary ' . $binary . ' not found', 1488631746);
+            if (!$testMode) {
+                $this->logger->error(self::BINARY_NOT_FOUND, [
+                    'file' => $file,
+                    'fileExtension' => $extension,
+                    'binary' => $this->configuration[$extension . 'Binary']
+                ]);
+            }
+            throw new BinaryNotFoundException('Binary ' . $binary . ' not found', 1488631746);
         }
 
         $parameters = $this->configuration[$extension . 'ParametersOn' . $when];
         $parameters = preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
         $parameters = preg_replace('/%s/', $file, $parameters);
 
-        $command = $binary . ' ' . $parameters . ' 2>&1';
-        $output = [];
+        $this->command = $binary . ' ' . $parameters . ' 2>&1';
         $returnValue = 0;
-        CommandUtility::exec($command, $output, $returnValue);
-        if ((bool)$this->configuration['debug'] === true && is_object($GLOBALS['BE_USER'])) {
-            $error = $returnValue == 0 ? 0 : 1;
-            $GLOBALS['BE_USER']->writelog(4, 0, $error, 0,
-                $command . ' exited with ' . $returnValue . '. Output was: ' . implode(' ', $output), $output);
-        }
+        CommandUtility::exec($this->command, $this->output, $returnValue);
+        $executionWasSuccessful = $returnValue == 0;
+        if (!$testMode) {
+            $this->logger->log(
+                $executionWasSuccessful ? LogLevel::INFO : LogLevel::ERROR,
+                'Optimization was not successful',
+                [
+                    'file' => $file,
+                    'fileExtension' => $extension,
+                    'fileisUploaded' => $fileIsUploaded ? 1 : 0,
+                    'command' => $this->command,
+                    'returnValue' => $returnValue,
+                    'output' => $this->output
+                ]
+            );
 
+        }
         GeneralUtility::fixPermissions($file);
+
+        return $executionWasSuccessful;
     }
+
+    /**
+     * Reset debug informations
+     */
+    protected function reset()
+    {
+        $this->command = '';
+        $this->output = [];
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommand()
+    {
+        return $this->command;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOutput()
+    {
+        return $this->output;
+    }
+
 }

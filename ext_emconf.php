@@ -12,10 +12,10 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'post@christophlehmann.eu',
     'state' => 'stable',
     'clearCacheOnLoad' => 1,
-    'version' => '1.0.4',
+    'version' => '1.1.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '6.2.0-8.9.99',
+            'typo3' => '7.6.0-8.7.99',
         ],
         'conflicts' => [],
         'suggests' => [],
