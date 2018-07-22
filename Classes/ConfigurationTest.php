@@ -6,6 +6,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Messaging\Renderer\BootstrapRenderer;
 
 class ConfigurationTest
 {
@@ -73,6 +74,7 @@ class ConfigurationTest
             $messageQueue->addMessage($message);
         }
 
-        return $messageQueue->renderFlashMessages();
+        $flashMessageRenderer = GeneralUtility::makeInstance(BootstrapRenderer::class);
+        return $messageQueue->renderFlashMessages($flashMessageRenderer);
     }
 }
