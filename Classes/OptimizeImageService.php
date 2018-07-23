@@ -91,7 +91,7 @@ class OptimizeImageService
         if (!$testMode) {
             $this->logger->log(
                 $executionWasSuccessful ? LogLevel::INFO : LogLevel::ERROR,
-                'Optimization was not successful',
+                $executionWasSuccessful ? 'Optimization was successful' : 'Optimization failed',
                 [
                     'file' => $file,
                     'fileExtension' => $extension,
