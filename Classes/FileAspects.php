@@ -57,10 +57,12 @@ class FileAspects
         if ($processedFile->usesOriginalFile() === true || $processedFile->isUpdated() === true) {
             $fileForLocalProcessing = $processedFile->getForLocalProcessing();
             $this->service->process($fileForLocalProcessing, $processedFile->getExtension());
-            $processedFile->updateWithLocalFile($fileForLocalProcessing);
 
-            $processedFileRepository = GeneralUtility::makeInstance(ProcessedFileRepository::class);
-            $processedFileRepository->add($processedFile);
+            if ($processedFile->getSha1() !== sha1_file($fileForLocalProcessing)) {
+                $processedFile->updateWithLocalFile($fileForLocalProcessing);
+                $processedFileRepository = GeneralUtility::makeInstance(ProcessedFileRepository::class);
+                $processedFileRepository->add($processedFile);
+            }
         }
     }
 }
