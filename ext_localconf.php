@@ -12,14 +12,14 @@ if ((isset($configuration['jpgOnUpload']) && (bool)$configuration['jpgOnUpload']
     (isset($configuration['svgOnUpload']) && (bool)$configuration['svgOnUpload'] === true)) {
     $signalSlotDispatcher->connect(
         'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
-        \TYPO3\CMS\Core\Resource\ResourceStorage::SIGNAL_PreFileAdd,
+        \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PreFileAdd,
         'Lemming\\Imageoptimizer\\FileAspects',
         'addFile'
     );
 
     $signalSlotDispatcher->connect(
         'TYPO3\\CMS\\Core\\Resource\\ResourceStorage',
-        \TYPO3\CMS\Core\Resource\ResourceStorage::SIGNAL_PreFileReplace,
+        \TYPO3\CMS\Core\Resource\ResourceStorageInterface::SIGNAL_PreFileReplace,
         'Lemming\\Imageoptimizer\\FileAspects',
         'replaceFile'
     );
