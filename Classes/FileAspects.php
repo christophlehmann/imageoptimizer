@@ -1,30 +1,32 @@
 <?php
 namespace Lemming\Imageoptimizer;
 
+use TYPO3\CMS\Core\Resource\FileInterface;
+use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class FileAspects
 {
 
     /**
-     * @var \Lemming\Imageoptimizer\OptimizeImageService
+     * @var OptimizeImageService
      */
     protected $service;
 
     public function __construct()
     {
-        $this->service = GeneralUtility::makeInstance('Lemming\Imageoptimizer\OptimizeImageService');
+        $this->service = GeneralUtility::makeInstance(OptimizeImageService::class);
     }
 
     /**
      * Called when a new file is uploaded
      *
      * @param string $targetFileName
-     * @param \TYPO3\CMS\Core\Resource\Folder $targetFolder
+     * @param Folder $targetFolder
      * @param string $sourceFilePath
      * @return string Modified target file name
      */
-    public function addFile($targetFileName, \TYPO3\CMS\Core\Resource\Folder $targetFolder, $sourceFilePath)
+    public function addFile($targetFileName, Folder $targetFolder, $sourceFilePath)
     {
         $this->service->process($sourceFilePath, pathinfo($targetFileName)['extension'], true);
     }
@@ -32,10 +34,10 @@ class FileAspects
     /**
      * Called when a file is overwritten
      *
-     * @param \TYPO3\CMS\Core\Resource\FileInterface $file The file to replace
+     * @param FileInterface $file The file to replace
      * @param string $localFilePath The uploaded file
      */
-    public function replaceFile(\TYPO3\CMS\Core\Resource\FileInterface $file, $localFilePath)
+    public function replaceFile(FileInterface $file, $localFilePath)
     {
         $this->service->process($localFilePath, $file->getExtension(), true);
     }
