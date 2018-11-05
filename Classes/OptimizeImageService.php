@@ -1,15 +1,16 @@
 <?php
 namespace Lemming\Imageoptimizer;
 
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Core\Log\LogManager;
-use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class OptimizeImageService
+class OptimizeImageService implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
 
     const BINARY_NOT_FOUND = 'The Binary was not found in $PATH. $GLOBALS[\'TYPO3_CONF_VARS\'][\'SYS\'][\'binSetup\'] may help you. Good luck!';
 
@@ -24,11 +25,6 @@ class OptimizeImageService
     protected $output = [];
 
     /**
-     * @var Logger
-     */
-    protected $logger;
-
-    /**
      * @var array
      */
     protected $configuration;
@@ -39,7 +35,6 @@ class OptimizeImageService
     public function __construct()
     {
         $this->configuration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('imageoptimizer');
-        $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
     }
 
     /**
@@ -63,13 +58,13 @@ class OptimizeImageService
             }
         }
         $extension = strtolower($extension);
-        if ($extension == 'jpeg') {
+        if ($extension === 'jpeg') {
             $extension = 'jpg';
         }
         $when = $fileIsUploaded === true ? 'Upload' : 'Processing';
 
         if ((bool)$this->configuration[$extension . 'On' . $when] === false && $testMode === false) {
-            return;
+            return false;
         }
 
         $binary = CommandUtility::getCommand(escapeshellcmd($this->configuration[$extension . 'Binary']));
@@ -106,7 +101,6 @@ class OptimizeImageService
                     'output' => $this->output
                 ]
             );
-
         }
         GeneralUtility::fixPermissions($file);
 
@@ -137,5 +131,4 @@ class OptimizeImageService
     {
         return $this->output;
     }
-
 }

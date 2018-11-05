@@ -11,33 +11,22 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     */
-    protected $objectManager = null;
-
-    /**
-     * Default constructor
-     */
-    public function __construct()
-    {
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-    }
-
-    /**
      * Determines if the needed binaries are found
      *
      * @return array List of statuses
      */
     public function getStatus()
     {
-        $configuration = $this->objectManager->get(ExtensionConfiguration::class)->get('imageoptimizer');
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $configuration = $objectManager->get(ExtensionConfiguration::class)->get('imageoptimizer');
         $extensions = ['jpg', 'png', 'gif', 'svg'];
         foreach ($extensions as $extension) {
             $binary = escapeshellcmd($configuration[$extension . 'Binary']);
             $binaryFound = is_string(CommandUtility::getCommand($binary));
-            $binaryUsed = ((bool)($configuration[$extension . 'OnUpload']) === true || (bool)($configuration[$extension . 'OnProcessing']) === true);
+            $binaryUsed = ((bool)($configuration[$extension . 'OnUpload']) === true
+                || (bool)($configuration[$extension . 'OnProcessing']) === true);
 
-            $status[$extension] = $this->objectManager->get(
+            $status[$extension] = $objectManager->get(
                 Status::class,
                 'Binary ' . $binary,
                 $binaryFound ? 'Found' : OptimizeImageService::BINARY_NOT_FOUND,

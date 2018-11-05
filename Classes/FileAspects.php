@@ -1,8 +1,6 @@
 <?php
 namespace Lemming\Imageoptimizer;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 class FileAspects
 {
 
@@ -11,9 +9,12 @@ class FileAspects
      */
     protected $service;
 
-    public function __construct()
+    /**
+     * @param OptimizeImageService $optimizeImageService
+     */
+    public function __construct(OptimizeImageService $optimizeImageService)
     {
-        $this->service = GeneralUtility::makeInstance('Lemming\Imageoptimizer\OptimizeImageService');
+        $this->service = $optimizeImageService;
     }
 
     /**

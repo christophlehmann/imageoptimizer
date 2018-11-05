@@ -1,7 +1,8 @@
 <?php
 
 $configuration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-    \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('imageoptimizer');
+    \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+)->get('imageoptimizer');
 
 if (!isset($signalSlotDispatcher)) {
     $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\SignalSlot\Dispatcher');
