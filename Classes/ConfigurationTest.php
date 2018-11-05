@@ -1,12 +1,12 @@
 <?php
 namespace Lemming\Imageoptimizer;
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Messaging\Renderer\BootstrapRenderer;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class ConfigurationTest
 {
@@ -43,8 +43,11 @@ class ConfigurationTest
             }
 
             $header = sprintf('%s%s', strtoupper($fileExtension), $fileIsUploaded ? ' on Upload' : '');
-            $file = sprintf('%s/Resources/Private/Images/example.%s',
-                ExtensionManagementUtility::extPath('imageoptimizer'), $fileExtension);
+            $file = sprintf(
+                '%s/Resources/Private/Images/example.%s',
+                ExtensionManagementUtility::extPath('imageoptimizer'),
+                $fileExtension
+            );
             $temporaryFile = GeneralUtility::tempnam('imageoptimizer', $fileExtension);
             copy($file, $temporaryFile);
 
@@ -55,17 +58,23 @@ class ConfigurationTest
                     $fileIsUploaded,
                     true
                 );
-                $message = GeneralUtility::makeInstance(FlashMessage::class,
+                /** @var FlashMessage $message */
+                $message = GeneralUtility::makeInstance(
+                    FlashMessage::class,
                     implode(PHP_EOL, $this->service->getOutput()),
                     sprintf('%s: %s', $header, $this->service->getCommand()),
                     $returnValue ? FlashMessage::OK : FlashMessage::ERROR
                 );
-
             } catch (BinaryNotFoundException $e) {
-                $message = GeneralUtility::makeInstance(FlashMessage::class,
+                /** @var FlashMessage $message */
+                $message = GeneralUtility::makeInstance(
+                    FlashMessage::class,
                     OptimizeImageService::BINARY_NOT_FOUND,
-                    sprintf($header, strtoupper($fileExtension),
-                        $fileIsUploaded ? 'on Upload' : ''),
+                    sprintf(
+                        $header,
+                        strtoupper($fileExtension),
+                        $fileIsUploaded ? 'on Upload' : ''
+                    ),
                     FlashMessage::ERROR
                 );
             }
