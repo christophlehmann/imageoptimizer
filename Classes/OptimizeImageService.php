@@ -82,7 +82,7 @@ class OptimizeImageService
 
         $parameters = $this->configuration[$extension . 'ParametersOn' . $when];
         $parameters = preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
-        $parameters = preg_replace('/%s/', $file, $parameters);
+        $parameters = preg_replace('/%s/', escapeshellarg($file), $parameters);
 
         $this->command = $binary . ' ' . $parameters . ' 2>&1';
         $returnValue = 0;
