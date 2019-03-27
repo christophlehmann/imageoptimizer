@@ -72,17 +72,18 @@ class OptimizeImageService
             return;
         }
 
-        $binary = CommandUtility::getCommand(escapeshellcmd($this->configuration[$extension . 'Binary']));
+        $binaryName = $this->configuration[$extension . 'Binary'];
+        $binary = CommandUtility::getCommand(escapeshellcmd($binaryName));
 
         if (!is_string($binary)) {
             if (!$testMode) {
                 $this->logger->error(self::BINARY_NOT_FOUND, [
                     'file' => $file,
                     'fileExtension' => $extension,
-                    'binary' => $this->configuration[$extension . 'Binary']
+                    'binary' => $binaryName
                 ]);
             }
-            throw new BinaryNotFoundException('Binary ' . $binary . ' not found', 1488631746);
+            throw new BinaryNotFoundException('Binary ' . $binaryName . ' not found', 1488631746);
         }
 
         $parameters = $this->configuration[$extension . 'ParametersOn' . $when];
