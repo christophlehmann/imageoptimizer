@@ -2,6 +2,7 @@
   "name": "christophlehmann/imageoptimizer",
   "type": "typo3-cms-extension",
   "description": "Optimize uploaded/processed images with binaries of your choice",
+  "license": "GPL-2.0-or-later",
   "keywords": [
     "TYPO3",
     "extension",
