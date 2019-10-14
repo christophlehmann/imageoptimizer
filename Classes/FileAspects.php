@@ -51,7 +51,7 @@ class FileAspects
      */
     public function processFile($fileProcessingService, $driver, $processedFile)
     {
-        if ($processedFile->isUpdated() === true) {
+        if ($processedFile->isUpdated() === true && !$processedFile->usesOriginalFile()) {
             // ToDo: Find better possibility for getPublicUrl()
             $this->service->process(PATH_site . $processedFile->getPublicUrl(), $processedFile->getExtension());
         }
