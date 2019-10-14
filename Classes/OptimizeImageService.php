@@ -72,7 +72,7 @@ class OptimizeImageService implements LoggerAwareInterface
 
         if (!is_string($binary)) {
             if (!$testMode) {
-                $this->logger->error(self::BINARY_NOT_FOUND, [
+                $this->logger->log(LogLevel::ERROR, self::BINARY_NOT_FOUND, [
                     'file' => $file,
                     'fileExtension' => $extension,
                     'binary' => $binaryName

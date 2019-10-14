@@ -1,10 +1,6 @@
 <?php
 
-/***************************************************************
- * Extension Manager/Repository config file for ext: "imageoptimizer"
- ***************************************************************/
-
-$EM_CONF[$_EXTKEY] = [
+$EM_CONF['imageoptimizer'] = [
     'title' => 'ImageOptimizer',
     'description' => 'Optimize uploaded/processed images with binaries of your choice',
     'category' => 'misc',
