@@ -20,6 +20,7 @@
     }
   },
   "replace": {
-    "imageoptimizer": "self.version"
+    "christophlehmann/imageoptimizer": "self.version",
+    "typo3-ter/imageoptimizer": "self.version"
   }
 }
