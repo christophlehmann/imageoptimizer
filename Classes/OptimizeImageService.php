@@ -51,6 +51,10 @@ class OptimizeImageService implements LoggerAwareInterface
     {
         $this->reset();
 
+        if (!\file_exists($file)) {
+            return;
+        }
+        
         if ($extension === null) {
             $pathinfo = pathinfo($file);
             if ($pathinfo['extension'] !== null) {
