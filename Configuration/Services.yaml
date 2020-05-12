@@ -1,0 +1,16 @@
+services:
+  Lemming\Imageoptimizer\EventListener\BeforeFileAdded:
+    tags:
+      - name: event.listener
+        identifier: 'ImageOptimizer'
+        event: TYPO3\CMS\Core\Resource\Event\BeforeFileAddedEvent
+  Lemming\Imageoptimizer\EventListener\BeforeFileReplaced:
+    tags:
+      - name: event.listener
+        identifier: 'ImageOptimizer'
+        event: TYPO3\CMS\Core\Resource\Event\BeforeFileReplacedEvent
+  Lemming\Imageoptimizer\EventListener\AfterFileProcessing:
+    tags:
+      - name: event.listener
+        identifier: 'ImageOptimizer'
+        event: TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent
