@@ -4,12 +4,11 @@ namespace Lemming\Imageoptimizer;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Reports\Status;
+use TYPO3\CMS\Reports\StatusProviderInterface;
 
-class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface
+class StatusReport implements StatusProviderInterface
 {
-
     /**
      * Determines if the needed binaries are found
      *
@@ -17,8 +16,7 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface
      */
     public function getStatus()
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $configuration = $objectManager->get(ExtensionConfiguration::class)->get('imageoptimizer');
+        $configuration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('imageoptimizer');
         $extensions = ['jpg', 'png', 'gif', 'svg'];
         foreach ($extensions as $extension) {
             $binary = escapeshellcmd($configuration[$extension . 'Binary']);
@@ -26,7 +24,7 @@ class StatusReport implements \TYPO3\CMS\Reports\StatusProviderInterface
             $binaryUsed = ((bool)($configuration[$extension . 'OnUpload']) === true
                 || (bool)($configuration[$extension . 'OnProcessing']) === true);
 
-            $status[$extension] = $objectManager->get(
+            $status[$extension] = GeneralUtility::makeInstance(
                 Status::class,
                 'Binary ' . $binary,
                 $binaryFound ? 'Found' : OptimizeImageService::BINARY_NOT_FOUND,
