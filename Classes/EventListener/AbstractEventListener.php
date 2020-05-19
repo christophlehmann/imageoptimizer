@@ -6,13 +6,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class AbstractEventListener
 {
-    /**
-     * @var OptimizeImageService
-     */
-    protected $service;
-
-    public function __construct()
+    public function getService(): OptimizeImageService
     {
-        $service = GeneralUtility::makeInstance(OptimizeImageService::class);
+        return GeneralUtility::makeInstance(OptimizeImageService::class);
     }
 }

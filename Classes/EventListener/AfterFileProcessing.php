@@ -8,7 +8,7 @@ class AfterFileProcessing extends AbstractEventListener
     public function __invoke(AfterFileProcessingEvent $event): void
     {
         if ($event->getProcessedFile()->isUpdated() && !$event->getProcessedFile()->usesOriginalFile()) {
-            $this->service->process(
+            $this->getService()->process(
                 $event->getProcessedFile()->getPublicUrl(true),
                 $event->getProcessedFile()->getExtension()
             );
