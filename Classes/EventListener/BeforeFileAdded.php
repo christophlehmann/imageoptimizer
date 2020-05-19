@@ -7,7 +7,7 @@ class BeforeFileAdded extends AbstractEventListener
 {
     public function __invoke(BeforeFileAddedEvent $event): void
     {
-        $this->service->process(
+        $this->getService()->process(
             $event->getSourceFilePath(),
             pathinfo($event->getFileName(), PATHINFO_EXTENSION),
             true
