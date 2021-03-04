@@ -19,6 +19,11 @@
       "Lemming\\Imageoptimizer\\": "Classes/"
     }
   },
+  "extra": {
+    "typo3/cms": {
+      "extension-key":"imageoptimizer"
+    }
+  },
   "replace": {
     "christophlehmann/imageoptimizer": "self.version",
     "typo3-ter/imageoptimizer": "self.version"
