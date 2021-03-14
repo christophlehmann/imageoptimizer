@@ -14,6 +14,11 @@
   "require": {
     "typo3/cms-core": "^10.4"
   },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "imageoptimizer"
+    }
+  },
   "autoload": {
     "psr-4": {
       "Lemming\\Imageoptimizer\\": "Classes/"
