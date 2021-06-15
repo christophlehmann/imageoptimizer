@@ -10,7 +10,7 @@ $EM_CONF['imageoptimizer'] = [
     'version' => '3.0.1',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-10.4.99',
+            'typo3' => '10.4.0-11.2.99',
         ],
     ],
 ];
