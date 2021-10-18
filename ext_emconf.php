@@ -7,10 +7,10 @@ $EM_CONF['imageoptimizer'] = [
     'author' => 'Christoph Lehmann',
     'author_email' => 'post@christophlehmann.eu',
     'state' => 'stable',
-    'version' => '3.0.2',
+    'version' => '3.0.3',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-11.2.99',
+            'typo3' => '10.4.0-11.5.99',
         ],
     ],
 ];
