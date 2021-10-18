@@ -1,0 +1,42 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        env:
+          # See version matrix @ https://typo3.org/cms/roadmap
+          - { php: 7.2, typo3: 10.4 }
+          - { php: 7.4, typo3: 11.5 }
+
+    env: ${{ matrix.env }}
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up PHP Version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.env.php }}
+          tools: composer:v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+      - name: Install composer dependencies
+        run: |
+          composer require friendsoftypo3/phpstan-typo3:^0.8 typo3/cms-core:^$typo3 typo3/cms-reports:^$typo3
+
+      - name: Run PHPStan
+        run: ./.Build/bin/phpstan analyse

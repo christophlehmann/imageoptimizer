@@ -16,16 +16,32 @@
   },
   "extra": {
     "typo3/cms": {
-      "extension-key": "imageoptimizer"
+      "extension-key": "imageoptimizer",
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "app-dir": ".Build",
+      "web-dir": ".Build/public"
     }
+  },
+  "config": {
+    "vendor-dir": ".Build/vendor",
+    "bin-dir": ".Build/bin"
   },
   "autoload": {
     "psr-4": {
       "Lemming\\Imageoptimizer\\": "Classes/"
     }
   },
+  "scripts": {
+    "run-tests":[
+      ".Build/bin/phpstan analyse"
+    ]
+  },
   "replace": {
     "christophlehmann/imageoptimizer": "self.version",
     "typo3-ter/imageoptimizer": "self.version"
+  },
+  "require-dev": {
+    "friendsoftypo3/phpstan-typo3": "^0.8.1",
+    "typo3/cms-reports": "^10.4 || ^11.5"
   }
 }
