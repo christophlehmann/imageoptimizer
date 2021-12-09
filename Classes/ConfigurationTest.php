@@ -6,7 +6,6 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Messaging\Renderer\BootstrapRenderer;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class ConfigurationTest
 {
@@ -16,23 +15,21 @@ class ConfigurationTest
     protected $service;
 
     /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
-    /**
      * @var FlashMessageService
      */
     protected $flashMessageService;
 
     public function __construct()
     {
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->service = $this->objectManager->get(OptimizeImageService::class);
-        $this->flashMessageService = $this->objectManager->get(FlashMessageService::class);
+        $this->service = GeneralUtility::makeInstance(OptimizeImageService::class);
+        $this->flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
     }
 
-    public function testCommand($params)
+    /**
+     * @param array $params
+     * @return string
+     */
+    public function testCommand(array $params): string
     {
         $fileExtension = $params['fieldValue'];
         $messageQueue = $this->flashMessageService->getMessageQueueByIdentifier();
@@ -42,14 +39,14 @@ class ConfigurationTest
                 continue;
             }
 
-            $header = sprintf('%s%s', strtoupper($fileExtension), $fileIsUploaded ? ' on Upload' : '');
-            $file = sprintf(
+            $header = \sprintf('%s%s', \strtoupper($fileExtension), $fileIsUploaded ? ' on Upload' : '');
+            $file = \sprintf(
                 '%s/Resources/Private/Images/example.%s',
                 ExtensionManagementUtility::extPath('imageoptimizer'),
                 $fileExtension
             );
             $temporaryFile = GeneralUtility::tempnam('imageoptimizer', $fileExtension);
-            copy($file, $temporaryFile);
+            \copy($file, $temporaryFile);
 
             try {
                 $returnValue = $this->service->process(
@@ -61,8 +58,8 @@ class ConfigurationTest
                 /** @var FlashMessage $message */
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
-                    implode(PHP_EOL, $this->service->getOutput()),
-                    sprintf('%s: %s', $header, $this->service->getCommand()),
+                    \implode(PHP_EOL, $this->service->getOutput()),
+                    \sprintf('%s: %s', $header, $this->service->getCommand()),
                     $returnValue ? FlashMessage::OK : FlashMessage::ERROR
                 );
             } catch (BinaryNotFoundException $e) {
@@ -70,16 +67,16 @@ class ConfigurationTest
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
                     OptimizeImageService::BINARY_NOT_FOUND,
-                    sprintf(
+                    \sprintf(
                         $header,
-                        strtoupper($fileExtension),
+                        \strtoupper($fileExtension),
                         $fileIsUploaded ? 'on Upload' : ''
                     ),
                     FlashMessage::ERROR
                 );
             }
 
-            unlink($temporaryFile);
+            \unlink($temporaryFile);
             $messageQueue->addMessage($message);
         }
 

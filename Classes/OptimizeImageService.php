@@ -41,27 +41,31 @@ class OptimizeImageService implements LoggerAwareInterface
      * Perform image optimization
      *
      * @param string $file
-     * @param string $extension
+     * @param string|null $extension
      * @param bool $fileIsUploaded
      * @param bool $testMode
      * @return bool
      * @throws BinaryNotFoundException
      */
-    public function process($file, $extension = null, $fileIsUploaded = false, $testMode = false)
-    {
+    public function process(
+        string $file,
+        string $extension = null,
+        bool $fileIsUploaded = false,
+        bool $testMode = false
+    ): bool {
         $this->reset();
 
         if (!\file_exists($file)) {
-            return;
+            return false;
         }
-        
+
         if ($extension === null) {
-            $pathinfo = pathinfo($file);
+            $pathinfo = \pathinfo($file);
             if ($pathinfo['extension'] !== null) {
                 $extension = $pathinfo['extension'];
             }
         }
-        $extension = strtolower($extension);
+        $extension = \strtolower($extension);
         if ($extension === 'jpeg') {
             $extension = 'jpg';
         }
@@ -72,9 +76,9 @@ class OptimizeImageService implements LoggerAwareInterface
         }
 
         $binaryName = $this->configuration[$extension . 'Binary'];
-        $binary = CommandUtility::getCommand(escapeshellcmd($binaryName));
+        $binary = CommandUtility::getCommand(\escapeshellcmd($binaryName));
 
-        if (!is_string($binary)) {
+        if (!\is_string($binary)) {
             if (!$testMode) {
                 $this->logger->log(LogLevel::ERROR, self::BINARY_NOT_FOUND, [
                     'file' => $file,
@@ -86,8 +90,8 @@ class OptimizeImageService implements LoggerAwareInterface
         }
 
         $parameters = $this->configuration[$extension . 'ParametersOn' . $when];
-        $parameters = preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
-        $parameters = preg_replace('/%s/', escapeshellarg($file), $parameters);
+        $parameters = \preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
+        $parameters = \preg_replace('/%s/', \escapeshellarg($file), $parameters);
 
         $this->command = $binary . ' ' . $parameters . ' 2>&1';
         $returnValue = 0;
@@ -114,8 +118,10 @@ class OptimizeImageService implements LoggerAwareInterface
 
     /**
      * Reset debug informations
+     *
+     * @return void
      */
-    protected function reset()
+    protected function reset(): void
     {
         $this->command = '';
         $this->output = [];
@@ -124,7 +130,7 @@ class OptimizeImageService implements LoggerAwareInterface
     /**
      * @return string
      */
-    public function getCommand()
+    public function getCommand(): string
     {
         return $this->command;
     }
@@ -132,7 +138,7 @@ class OptimizeImageService implements LoggerAwareInterface
     /**
      * @return array
      */
-    public function getOutput()
+    public function getOutput(): array
     {
         return $this->output;
     }

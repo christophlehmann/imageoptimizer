@@ -14,13 +14,14 @@ class StatusReport implements StatusProviderInterface
      *
      * @return array List of statuses
      */
-    public function getStatus()
+    public function getStatus(): array
     {
         $configuration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('imageoptimizer');
         $extensions = ['jpg', 'png', 'gif', 'svg'];
+        $status = [];
         foreach ($extensions as $extension) {
-            $binary = escapeshellcmd($configuration[$extension . 'Binary']);
-            $binaryFound = is_string(CommandUtility::getCommand($binary));
+            $binary = \escapeshellcmd($configuration[$extension . 'Binary']);
+            $binaryFound = \is_string(CommandUtility::getCommand($binary));
             $binaryUsed = ((bool)($configuration[$extension . 'OnUpload']) === true
                 || (bool)($configuration[$extension . 'OnProcessing']) === true);
 
