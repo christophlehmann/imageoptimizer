@@ -60,12 +60,12 @@ class OptimizeImageService implements LoggerAwareInterface
         }
 
         if ($extension === null) {
-            $pathinfo = \pathinfo($file);
+            $pathinfo = pathinfo($file);
             if ($pathinfo['extension'] !== null) {
                 $extension = $pathinfo['extension'];
             }
         }
-        $extension = \strtolower($extension);
+        $extension = strtolower($extension);
         if ($extension === 'jpeg') {
             $extension = 'jpg';
         }
@@ -76,9 +76,9 @@ class OptimizeImageService implements LoggerAwareInterface
         }
 
         $binaryName = $this->configuration[$extension . 'Binary'];
-        $binary = CommandUtility::getCommand(\escapeshellcmd($binaryName));
+        $binary = CommandUtility::getCommand(escapeshellcmd($binaryName));
 
-        if (!\is_string($binary)) {
+        if (!is_string($binary)) {
             if (!$testMode) {
                 $this->logger->log(LogLevel::ERROR, self::BINARY_NOT_FOUND, [
                     'file' => $file,
@@ -90,8 +90,8 @@ class OptimizeImageService implements LoggerAwareInterface
         }
 
         $parameters = $this->configuration[$extension . 'ParametersOn' . $when];
-        $parameters = \preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
-        $parameters = \preg_replace('/%s/', \escapeshellarg($file), $parameters);
+        $parameters = preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
+        $parameters = preg_replace('/%s/', escapeshellarg($file), $parameters);
 
         $this->command = $binary . ' ' . $parameters . ' 2>&1';
         $returnValue = 0;
@@ -127,17 +127,11 @@ class OptimizeImageService implements LoggerAwareInterface
         $this->output = [];
     }
 
-    /**
-     * @return string
-     */
     public function getCommand(): string
     {
         return $this->command;
     }
 
-    /**
-     * @return array
-     */
     public function getOutput(): array
     {
         return $this->output;

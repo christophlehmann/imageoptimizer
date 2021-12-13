@@ -25,10 +25,6 @@ class ConfigurationTest
         $this->flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
     }
 
-    /**
-     * @param array $params
-     * @return string
-     */
     public function testCommand(array $params): string
     {
         $fileExtension = $params['fieldValue'];
@@ -39,14 +35,14 @@ class ConfigurationTest
                 continue;
             }
 
-            $header = \sprintf('%s%s', \strtoupper($fileExtension), $fileIsUploaded ? ' on Upload' : '');
-            $file = \sprintf(
+            $header = sprintf('%s%s', strtoupper($fileExtension), $fileIsUploaded ? ' on Upload' : '');
+            $file = sprintf(
                 '%s/Resources/Private/Images/example.%s',
                 ExtensionManagementUtility::extPath('imageoptimizer'),
                 $fileExtension
             );
             $temporaryFile = GeneralUtility::tempnam('imageoptimizer', $fileExtension);
-            \copy($file, $temporaryFile);
+            copy($file, $temporaryFile);
 
             try {
                 $returnValue = $this->service->process(
@@ -58,8 +54,8 @@ class ConfigurationTest
                 /** @var FlashMessage $message */
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
-                    \implode(PHP_EOL, $this->service->getOutput()),
-                    \sprintf('%s: %s', $header, $this->service->getCommand()),
+                    implode(PHP_EOL, $this->service->getOutput()),
+                    sprintf('%s: %s', $header, $this->service->getCommand()),
                     $returnValue ? FlashMessage::OK : FlashMessage::ERROR
                 );
             } catch (BinaryNotFoundException $e) {
@@ -67,16 +63,16 @@ class ConfigurationTest
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
                     OptimizeImageService::BINARY_NOT_FOUND,
-                    \sprintf(
+                    sprintf(
                         $header,
-                        \strtoupper($fileExtension),
+                        strtoupper($fileExtension),
                         $fileIsUploaded ? 'on Upload' : ''
                     ),
                     FlashMessage::ERROR
                 );
             }
 
-            \unlink($temporaryFile);
+            unlink($temporaryFile);
             $messageQueue->addMessage($message);
         }
 

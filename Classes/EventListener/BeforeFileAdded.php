@@ -9,7 +9,7 @@ class BeforeFileAdded extends AbstractEventListener
     {
         $this->getService()->process(
             $event->getSourceFilePath(),
-            \pathinfo($event->getFileName(), PATHINFO_EXTENSION),
+            pathinfo($event->getFileName(), PATHINFO_EXTENSION),
             true
         );
     }
