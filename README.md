@@ -19,7 +19,7 @@ svgo is installable via NPM `npm install -g svgo`
 
 ## Debugging
 
-* Commands are tested in Extension Manager
+* Commands are tested in the Extension Settings module
 * Logging API: See file/database log
 
 ## Need Help?
