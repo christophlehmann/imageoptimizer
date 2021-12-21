@@ -39,12 +39,7 @@ class OptimizeImageService implements LoggerAwareInterface
 
     /**
      * Perform image optimization
-     *
-     * @param string $file
-     * @param string|null $extension
-     * @param bool $fileIsUploaded
-     * @param bool $testMode
-     * @return bool
+
      * @throws BinaryNotFoundException
      */
     public function process(
@@ -55,7 +50,8 @@ class OptimizeImageService implements LoggerAwareInterface
     ): bool {
         $this->reset();
 
-        if (!\file_exists($file)) {
+
+        if (!file_exists($file)) {
             return false;
         }
 
@@ -118,8 +114,6 @@ class OptimizeImageService implements LoggerAwareInterface
 
     /**
      * Reset debug informations
-     *
-     * @return void
      */
     protected function reset(): void
     {
