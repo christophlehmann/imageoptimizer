@@ -34,6 +34,12 @@
   "scripts": {
     "run-tests":[
       ".Build/bin/phpstan analyse"
+    ],
+    "prepare-release": [
+      "rm -rf .github",
+      "rm -rf .gitignore",
+      "rm -rf Documentation",
+      "rm -rf phpstan.neon"
     ]
   },
   "replace": {
