@@ -6,7 +6,6 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Messaging\Renderer\BootstrapRenderer;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class ConfigurationTest
 {
@@ -16,23 +15,17 @@ class ConfigurationTest
     protected $service;
 
     /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
-
-    /**
      * @var FlashMessageService
      */
     protected $flashMessageService;
 
     public function __construct()
     {
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->service = $this->objectManager->get(OptimizeImageService::class);
-        $this->flashMessageService = $this->objectManager->get(FlashMessageService::class);
+        $this->service = GeneralUtility::makeInstance(OptimizeImageService::class);
+        $this->flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
     }
 
-    public function testCommand($params)
+    public function testCommand(array $params): string
     {
         $fileExtension = $params['fieldValue'];
         $messageQueue = $this->flashMessageService->getMessageQueueByIdentifier();
