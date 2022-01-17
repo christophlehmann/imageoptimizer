@@ -67,6 +67,10 @@ class OptimizeImageService implements LoggerAwareInterface
         }
         $when = $fileIsUploaded === true ? 'Upload' : 'Processing';
 
+        if (!isset($this->configuration[$extension . 'On' . $when])) {
+            return false;
+        }
+
         if ((bool)$this->configuration[$extension . 'On' . $when] === false && $testMode === false) {
             return false;
         }
