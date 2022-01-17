@@ -43,7 +43,6 @@
     ]
   },
   "replace": {
-    "christophlehmann/imageoptimizer": "self.version",
     "typo3-ter/imageoptimizer": "self.version"
   },
   "require-dev": {
