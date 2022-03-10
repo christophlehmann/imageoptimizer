@@ -2,6 +2,8 @@
 
 Lossless image optimization. Process jpg/png/gif/svg images with binaries and parameters of your choice.
 
+Note: JPG and PNG were yesterday. If you wanna serve images in new formats like avif and webp including auto detection and asynchronous generation, then [imgroxy](https://github.com/christophlehmann/imgproxy) may fit your needs. #webvitals
+
 ## Features
 
 * Optimize images on upload or after processing (files in `fileadmin/_processed_/`)
@@ -21,7 +23,3 @@ svgo is installable via NPM `npm install -g svgo`
 
 * Commands are tested in the Extension Settings module
 * Logging API: See file/database log
-
-## Need Help?
-
-Join the Slack channel `#ext-imageoptimizer` @ https://forger.typo3.com/slack
