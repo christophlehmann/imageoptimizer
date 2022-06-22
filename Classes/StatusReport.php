@@ -23,7 +23,7 @@ class StatusReport implements StatusProviderInterface
             $binary = escapeshellcmd($configuration[$extension . 'Binary']);
             $binaryFound = is_string(CommandUtility::getCommand($binary));
             $binaryUsed = ((bool)($configuration[$extension . 'OnUpload']) === true
-                || (bool)($configuration[$extension . 'OnProcessing']) === true);
+                || (bool)($configuration[$extension . 'OnProcessing'] ?? null) === true);
 
             $status[$extension] = GeneralUtility::makeInstance(
                 Status::class,
