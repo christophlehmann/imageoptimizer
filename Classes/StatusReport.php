@@ -22,8 +22,8 @@ class StatusReport implements StatusProviderInterface
         foreach ($extensions as $extension) {
             $binary = escapeshellcmd($configuration[$extension . 'Binary']);
             $binaryFound = is_string(CommandUtility::getCommand($binary));
-            $binaryUsed = ((bool)($configuration[$extension . 'OnUpload']) === true
-                || (bool)($configuration[$extension . 'OnProcessing'] ?? null) === true);
+            $binaryUsed = ((bool)($configuration[$extension . 'OnUpload'] ?? false) === true
+                || (bool)($configuration[$extension . 'OnProcessing'] ?? false) === true);
 
             $status[$extension] = GeneralUtility::makeInstance(
                 Status::class,
