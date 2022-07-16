@@ -12,7 +12,7 @@ jobs:
         env:
           # See version matrix @ https://typo3.org/cms/roadmap
           - { php: 7.4, typo3: 10.4 }
-          - { php: 8.0, typo3: 11.5 }
+          - { php: 8.1, typo3: 11.5 }
 
     env: ${{ matrix.env }}
 
@@ -27,6 +27,9 @@ jobs:
 
       - name: Validate composer.json and composer.lock
         run: composer validate
+
+      - name: Lint PHP files
+        run: composer lint-php
 
       - name: Cache dependencies
         uses: actions/cache@v1

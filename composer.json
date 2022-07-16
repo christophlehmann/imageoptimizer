@@ -39,6 +39,7 @@
     "run-tests":[
       ".Build/bin/phpstan analyse"
     ],
+    "lint-php": "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
     "prepare-release": [
       "rm -rf .github",
       "rm -rf .gitignore",
