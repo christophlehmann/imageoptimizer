@@ -6,11 +6,11 @@ $EM_CONF['imageoptimizer'] = [
     'category' => 'misc',
     'author' => 'Christoph Lehmann',
     'author_email' => 'post@christophlehmann.eu',
-    'state' => 'stable',
-    'version' => '3.1.1',
+    'state' => 'alpha',
+    'version' => '3.2.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-11.5.99',
+            'typo3' => '10.4.0-12.4.99',
         ],
     ],
 ];
