@@ -100,7 +100,8 @@ class ConfigurationTest
                         \TYPO3\CMS\Core\Type\ContextualFeedbackSeverity::ERROR
                     );
                 }
-
+            }
+            
             unlink($temporaryFile);
             $messageQueue->addMessage($message);
         }
