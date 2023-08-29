@@ -4,6 +4,7 @@ namespace Lemming\Imageoptimizer;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Messaging\Renderer\BootstrapRenderer;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -51,13 +52,15 @@ class ConfigurationTest
                     $fileIsUploaded,
                     true
                 );
+
                 /** @var FlashMessage $message */
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
                     implode(PHP_EOL, $this->service->getOutput()),
                     sprintf('%s: %s', $header, $this->service->getCommand()),
-                    $returnValue ? FlashMessage::OK : FlashMessage::ERROR
+                    $returnValue ? ContextualFeedbackSeverity::OK : ContextualFeedbackSeverity::ERROR
                 );
+
             } catch (BinaryNotFoundException $e) {
                 /** @var FlashMessage $message */
                 $message = GeneralUtility::makeInstance(
@@ -68,7 +71,7 @@ class ConfigurationTest
                         strtoupper($fileExtension),
                         $fileIsUploaded ? 'on Upload' : ''
                     ),
-                    FlashMessage::ERROR
+                    ContextualFeedbackSeverity::ERROR
                 );
             }
 

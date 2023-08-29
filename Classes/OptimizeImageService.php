@@ -50,7 +50,6 @@ class OptimizeImageService implements LoggerAwareInterface
     ): bool {
         $this->reset();
 
-
         if (!file_exists($file)) {
             return false;
         }

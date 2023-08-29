@@ -5,14 +5,13 @@ on: [push, pull_request]
 jobs:
   build:
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         env:
           # See version matrix @ https://typo3.org/cms/roadmap
-          - { php: 7.4, typo3: 10.4 }
-          - { php: 8.1, typo3: 11.5 }
+          - { php: 8.2, typo3: 12.4 }
 
     env: ${{ matrix.env }}
 
@@ -39,7 +38,7 @@ jobs:
 
       - name: Install composer dependencies
         run: |
-          composer require friendsoftypo3/phpstan-typo3:^0.8 typo3/cms-core:^$typo3 typo3/cms-reports:^$typo3
+          composer install
 
       - name: Run PHPStan
-        run: ./.Build/bin/phpstan analyse
+        run: composer exec phpstan

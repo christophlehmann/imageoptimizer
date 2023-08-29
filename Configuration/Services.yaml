@@ -1,4 +1,10 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+  Lemming\Imageoptimizer\:
+    resource: '../Classes/*'
   Lemming\Imageoptimizer\EventListener\BeforeFileAdded:
     tags:
       - name: event.listener
@@ -14,3 +20,5 @@ services:
       - name: event.listener
         identifier: 'ImageOptimizer'
         event: TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent
+  Lemming\Imageoptimizer\StatusReport:
+    autoconfigure: true

@@ -2,6 +2,7 @@
 namespace Lemming\Imageoptimizer;
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Reports\Status;
@@ -9,6 +10,11 @@ use TYPO3\CMS\Reports\StatusProviderInterface;
 
 class StatusReport implements StatusProviderInterface
 {
+    public function getLabel(): string
+    {
+        return 'ImageOptimizer';
+    }
+
     /**
      * Determines if the needed binaries are found
      *
@@ -30,7 +36,7 @@ class StatusReport implements StatusProviderInterface
                 'Binary ' . $binary,
                 $binaryFound ? 'Found' : OptimizeImageService::BINARY_NOT_FOUND,
                 $binaryUsed ? 'In use' : 'Not in use',
-                $binaryFound || $binaryUsed === false ? Status::OK : Status::ERROR
+                $binaryFound || $binaryUsed === false ? ContextualFeedbackSeverity::OK : ContextualFeedbackSeverity::ERROR
             );
         }
         return $status;

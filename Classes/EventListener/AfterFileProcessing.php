@@ -10,7 +10,7 @@ class AfterFileProcessing extends AbstractEventListener
     {
         if ($event->getProcessedFile()->isUpdated() && !$event->getProcessedFile()->usesOriginalFile()) {
             $this->getService()->process(
-                Environment::getPublicPath() . '/' . ltrim($event->getProcessedFile()->getPublicUrl(true), '/'),
+                Environment::getPublicPath() . '/' . ltrim($event->getProcessedFile()->getPublicUrl(), '/'),
                 $event->getProcessedFile()->getExtension()
             );
         }

@@ -12,7 +12,7 @@
     "progressive"
   ],
   "require": {
-    "typo3/cms-core": "^10.4 || ^11.5"
+    "typo3/cms-core": "^12.4"
   },
   "extra": {
     "typo3/cms": {
@@ -36,9 +36,6 @@
     }
   },
   "scripts": {
-    "run-tests":[
-      ".Build/bin/phpstan analyse"
-    ],
     "lint-php": "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
     "prepare-release": [
       "rm -rf .github",
@@ -51,7 +48,7 @@
     "typo3-ter/imageoptimizer": "self.version"
   },
   "require-dev": {
-    "friendsoftypo3/phpstan-typo3": "^0.8.1",
-    "typo3/cms-reports": "^10.4 || ^11.5"
+    "typo3/cms-reports": "^12.4",
+    "phpstan/phpstan": "^1.10"
   }
 }
