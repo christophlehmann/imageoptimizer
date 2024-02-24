@@ -53,7 +53,6 @@ class ConfigurationTest
                     true
                 );
 
-                /** @var FlashMessage $message */
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
                     implode(PHP_EOL, $this->service->getOutput()),
@@ -62,7 +61,6 @@ class ConfigurationTest
                 );
 
             } catch (BinaryNotFoundException $e) {
-                /** @var FlashMessage $message */
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
                     OptimizeImageService::BINARY_NOT_FOUND,
