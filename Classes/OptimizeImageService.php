@@ -12,7 +12,7 @@ class OptimizeImageService implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    const BINARY_NOT_FOUND = 'The Binary was not found in $PATH. $GLOBALS[\'TYPO3_CONF_VARS\'][\'SYS\'][\'binSetup\'] may help you. Good luck!';
+    public const BINARY_NOT_FOUND = 'The Binary was not found in $PATH. $GLOBALS[\'TYPO3_CONF_VARS\'][\'SYS\'][\'binSetup\'] may help you.';
 
     /**
      * @var string
