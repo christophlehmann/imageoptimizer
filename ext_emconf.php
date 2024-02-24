@@ -1,6 +1,6 @@
 <?php
 
-$EM_CONF['imageoptimizer'] = [
+$EM_CONF[$_EXTKEY] = [
     'title' => 'ImageOptimizer',
     'description' => 'Optimize uploaded/processed images with binaries of your choice',
     'category' => 'misc',
