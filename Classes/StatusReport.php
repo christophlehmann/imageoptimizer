@@ -19,7 +19,7 @@ class StatusReport implements StatusProviderInterface
 
     public function getLabel(): string
     {
-        return 'ImageOptimizer';
+        return 'Image Optimizer';
     }
 
     /**
