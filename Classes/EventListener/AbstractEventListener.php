@@ -4,7 +4,7 @@ namespace Lemming\Imageoptimizer\EventListener;
 use Lemming\Imageoptimizer\OptimizeImageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class AbstractEventListener
+abstract class AbstractEventListener
 {
     public function getService(): OptimizeImageService
     {
