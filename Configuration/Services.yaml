@@ -20,5 +20,3 @@ services:
       - name: event.listener
         identifier: 'ImageOptimizer'
         event: TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent
-  Lemming\Imageoptimizer\StatusReport:
-    autoconfigure: true
