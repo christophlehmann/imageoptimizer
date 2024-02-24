@@ -14,15 +14,9 @@ class OptimizeImageService implements LoggerAwareInterface
 
     public const BINARY_NOT_FOUND = 'The Binary was not found in $PATH. $GLOBALS[\'TYPO3_CONF_VARS\'][\'SYS\'][\'binSetup\'] may help you.';
 
-    /**
-     * @var string
-     */
-    protected $command;
+    protected string $command;
 
-    /**
-     * @var array
-     */
-    protected $output = [];
+    protected array $output = [];
 
     /**
      * @var array

@@ -10,15 +10,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ConfigurationTest
 {
-    /**
-     * @var \Lemming\Imageoptimizer\OptimizeImageService
-     */
-    protected $service;
+    private OptimizeImageService $service;
 
-    /**
-     * @var FlashMessageService
-     */
-    protected $flashMessageService;
+    private FlashMessageService $flashMessageService;
 
     public function __construct()
     {
