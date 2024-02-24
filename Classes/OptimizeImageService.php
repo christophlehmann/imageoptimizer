@@ -18,17 +18,11 @@ class OptimizeImageService implements LoggerAwareInterface
 
     protected array $output = [];
 
-    /**
-     * @var array
-     */
-    protected $configuration;
+    private ExtensionConfiguration $extensionConfiguration;
 
-    /**
-     * Initialize
-     */
-    public function __construct()
+    public function __construct(ExtensionConfiguration $extensionConfiguration)
     {
-        $this->configuration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('imageoptimizer');
+        $this->extensionConfiguration = $extensionConfiguration;
     }
 
     /**
@@ -48,6 +42,8 @@ class OptimizeImageService implements LoggerAwareInterface
             return false;
         }
 
+        $configuration = $this->extensionConfiguration->get('imageoptimizer');
+
         if ($extension === null) {
             $pathinfo = pathinfo($file);
             if ($pathinfo['extension'] !== null) {
@@ -58,17 +54,18 @@ class OptimizeImageService implements LoggerAwareInterface
         if ($extension === 'jpeg') {
             $extension = 'jpg';
         }
+
         $when = $fileIsUploaded === true ? 'Upload' : 'Processing';
-
-        if (!isset($this->configuration[$extension . 'On' . $when])) {
+        $on = $extension . 'On' . $when;
+        if (!isset($configuration[$on])) {
             return false;
         }
 
-        if ((bool)$this->configuration[$extension . 'On' . $when] === false && $testMode === false) {
+        if ((bool)$configuration[$on] === false && $testMode === false) {
             return false;
         }
 
-        $binaryName = $this->configuration[$extension . 'Binary'];
+        $binaryName = $configuration[$extension . 'Binary'];
         $binary = CommandUtility::getCommand(escapeshellcmd($binaryName));
 
         if (!is_string($binary)) {
@@ -82,7 +79,8 @@ class OptimizeImageService implements LoggerAwareInterface
             throw new BinaryNotFoundException('Binary ' . $binaryName . ' not found', 1488631746);
         }
 
-        $parameters = $this->configuration[$extension . 'ParametersOn' . $when];
+        $parametersOn = $extension . 'ParametersOn' . $when;
+        $parameters = $configuration[$parametersOn];
         $parameters = preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
         $parameters = preg_replace('/%s/', escapeshellarg($file), $parameters);
 

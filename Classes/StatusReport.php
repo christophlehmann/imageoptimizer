@@ -10,6 +10,13 @@ use TYPO3\CMS\Reports\StatusProviderInterface;
 
 class StatusReport implements StatusProviderInterface
 {
+    private ExtensionConfiguration $extensionConfiguration;
+
+    public function __construct(ExtensionConfiguration $extensionConfiguration)
+    {
+        $this->extensionConfiguration = $extensionConfiguration;
+    }
+
     public function getLabel(): string
     {
         return 'ImageOptimizer';
@@ -22,7 +29,7 @@ class StatusReport implements StatusProviderInterface
      */
     public function getStatus(): array
     {
-        $configuration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('imageoptimizer');
+        $configuration = $this->extensionConfiguration->get('imageoptimizer');
         $extensions = ['jpg', 'png', 'gif', 'svg'];
         $status = [];
         foreach ($extensions as $extension) {
