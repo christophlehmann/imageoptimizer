@@ -1,54 +1,57 @@
 {
-  "name": "christophlehmann/imageoptimizer",
-  "type": "typo3-cms-extension",
-  "description": "Optimize uploaded/processed images with binaries of your choice",
-  "license": "GPL-2.0-or-later",
-  "keywords": [
-    "TYPO3",
-    "extension",
-    "optipng",
-    "jpegoptim",
-    "lossless",
-    "progressive"
-  ],
-  "require": {
-    "typo3/cms-core": "^12.4"
-  },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "imageoptimizer",
-      "cms-package-dir": "{$vendor-dir}/typo3/cms",
-      "app-dir": ".Build",
-      "web-dir": ".Build/public"
+    "name": "christophlehmann/imageoptimizer",
+    "description": "Optimize uploaded/processed images with binaries of your choice",
+    "license": "GPL-2.0-or-later",
+    "type": "typo3-cms-extension",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "optipng",
+        "jpegoptim",
+        "lossless",
+        "progressive"
+    ],
+    "require": {
+        "typo3/cms-core": "^12.4"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.42",
+        "phpstan/phpstan": "^1.10",
+        "typo3/cms-reports": "^12.4"
+    },
+    "replace": {
+        "typo3-ter/imageoptimizer": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lemming\\Imageoptimizer\\": "Classes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        },
+        "bin-dir": ".Build/bin",
+        "sort-packages": true,
+        "vendor-dir": ".Build/vendor"
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "extension-key": "imageoptimizer",
+            "web-dir": ".Build/public"
+        }
+    },
+    "scripts": {
+        "fix:composer:normalize": "@composer normalize --no-check-lock",
+        "lint-php": "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+        "prepare-release": [
+            "rm -rf .github",
+            "rm -rf .gitignore",
+            "rm -rf Documentation",
+            "rm -rf phpstan.neon"
+        ]
     }
-  },
-  "config": {
-    "vendor-dir": ".Build/vendor",
-    "bin-dir": ".Build/bin",
-    "allow-plugins": {
-      "typo3/class-alias-loader": true,
-      "typo3/cms-composer-installers": true
-    }
-  },
-  "autoload": {
-    "psr-4": {
-      "Lemming\\Imageoptimizer\\": "Classes/"
-    }
-  },
-  "scripts": {
-    "lint-php": "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-    "prepare-release": [
-      "rm -rf .github",
-      "rm -rf .gitignore",
-      "rm -rf Documentation",
-      "rm -rf phpstan.neon"
-    ]
-  },
-  "replace": {
-    "typo3-ter/imageoptimizer": "self.version"
-  },
-  "require-dev": {
-    "typo3/cms-reports": "^12.4",
-    "phpstan/phpstan": "^1.10"
-  }
 }
