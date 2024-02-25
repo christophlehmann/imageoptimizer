@@ -2,7 +2,9 @@
 
 Lossless image optimization. Process jpg/png/gif/svg images with binaries and parameters of your choice.
 
-Note: JPG and PNG were yesterday. If you wanna serve images in new formats like avif and webp including auto detection and asynchronous generation, then [imgroxy](https://github.com/christophlehmann/imgproxy) may fit your needs. #webvitals
+Note: JPG and PNG were yesterday.
+If you want to serve images in new formats like avif and webp including auto detection and asynchronous generation,
+then [imgroxy](https://github.com/christophlehmann/imgproxy) may fit your needs. #webvitals
 
 ## Features
 
