@@ -87,7 +87,7 @@ class OptimizeImageService implements LoggerAwareInterface
         $this->command = $binary . ' ' . $parameters . ' 2>&1';
         $returnValue = 0;
         CommandUtility::exec($this->command, $this->output, $returnValue);
-        $executionWasSuccessful = $returnValue == 0;
+        $executionWasSuccessful = $returnValue === 0;
         if (!$testMode) {
             $this->logger->log(
                 $executionWasSuccessful ? LogLevel::INFO : LogLevel::ERROR,
