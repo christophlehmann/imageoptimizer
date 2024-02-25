@@ -14,10 +14,13 @@ class ConfigurationTest
 
     private FlashMessageService $flashMessageService;
 
+    private BootstrapRenderer $flashMessageRenderer;
+
     public function __construct()
     {
         $this->service = GeneralUtility::makeInstance(OptimizeImageService::class);
         $this->flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
+        $this->flashMessageRenderer = GeneralUtility::makeInstance(BootstrapRenderer::class);
     }
 
     public function testCommand(array $params): string
@@ -53,7 +56,6 @@ class ConfigurationTest
                     sprintf('%s: %s', $header, $this->service->getCommand()),
                     $returnValue ? ContextualFeedbackSeverity::OK : ContextualFeedbackSeverity::ERROR
                 );
-
             } catch (BinaryNotFoundException $e) {
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
@@ -71,7 +73,6 @@ class ConfigurationTest
             $messageQueue->addMessage($message);
         }
 
-        $flashMessageRenderer = GeneralUtility::makeInstance(BootstrapRenderer::class);
-        return $messageQueue->renderFlashMessages($flashMessageRenderer);
+        return $messageQueue->renderFlashMessages($this->flashMessageRenderer);
     }
 }
