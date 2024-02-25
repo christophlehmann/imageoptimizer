@@ -1,0 +1,27 @@
+* text=auto
+*.css linguist-vendored
+*.scss linguist-vendored
+
+# Enforce checkout with linux lf consistent over all platforms
+*.html text eol=lf
+*.css text eol=lf
+*.tmpl text eol=lf
+*.less text eol=lf
+*.scss text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.php text eol=lf
+*.rst text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.ts text eol=lf
+*.typoscript text eol=lf
+*.xlf text eol=lf
+*.sh text eol=lf
+*.sql text eol=lf
+*.txt text eol=lf
+
+/.* export-ignore
+/Documentation export-ignore
+/phpstan.neon export-ignore
