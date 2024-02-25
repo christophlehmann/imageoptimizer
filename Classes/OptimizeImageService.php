@@ -45,9 +45,9 @@ class OptimizeImageService implements LoggerAwareInterface
         $configuration = $this->extensionConfiguration->get('imageoptimizer');
 
         if ($extension === null) {
-            $pathinfo = pathinfo($file);
-            if ($pathinfo['extension'] !== null) {
-                $extension = $pathinfo['extension'];
+            $pathInfo = pathinfo($file);
+            if ($pathInfo['extension'] !== null) {
+                $extension = $pathInfo['extension'];
             }
         }
         $extension = strtolower($extension);
