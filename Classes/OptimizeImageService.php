@@ -107,9 +107,6 @@ class OptimizeImageService implements LoggerAwareInterface
         return $executionWasSuccessful;
     }
 
-    /**
-     * Reset debug informations
-     */
     protected function reset(): void
     {
         $this->command = '';

@@ -24,8 +24,6 @@ class StatusReport implements StatusProviderInterface
 
     /**
      * Determines if the needed binaries are found
-     *
-     * @return array List of statuses
      */
     public function getStatus(): array
     {
