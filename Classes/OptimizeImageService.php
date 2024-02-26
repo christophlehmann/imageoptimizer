@@ -83,9 +83,9 @@ class OptimizeImageService implements LoggerAwareInterface
         }
 
         $parametersOn = $extension . 'ParametersOn' . $when;
-        $parameters = $configuration[$parametersOn];
-        $parameters = preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
-        $parameters = preg_replace('/%s/', escapeshellarg($file), $parameters);
+        $parameters = (string)$configuration[$parametersOn];
+        $parameters = (string) preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
+        $parameters = (string) preg_replace('/%s/', escapeshellarg($file), $parameters);
 
         $this->command = $binary . ' ' . $parameters . ' 2>&1';
         $returnValue = 0;
