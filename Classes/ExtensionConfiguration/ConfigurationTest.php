@@ -15,11 +15,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ConfigurationTest
 {
-    private OptimizeImageService $service;
+    private readonly OptimizeImageService $service;
 
-    private FlashMessageService $flashMessageService;
+    private readonly FlashMessageService $flashMessageService;
 
-    private BootstrapRenderer $flashMessageRenderer;
+    private readonly BootstrapRenderer $flashMessageRenderer;
 
     public function __construct()
     {
@@ -30,7 +30,7 @@ class ConfigurationTest
 
     public function testCommand(array $params): string
     {
-        $fileExtension = $params['fieldValue'];
+        $fileExtension = (string)$params['fieldValue'];
         $messageQueue = $this->flashMessageService->getMessageQueueByIdentifier();
 
         foreach ([false, true] as $fileIsUploaded) {
@@ -61,7 +61,7 @@ class ConfigurationTest
                     sprintf('%s: %s', $header, $this->service->getCommand()),
                     $returnValue ? ContextualFeedbackSeverity::OK : ContextualFeedbackSeverity::ERROR
                 );
-            } catch (BinaryNotFoundException $e) {
+            } catch (BinaryNotFoundException) {
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
                     OptimizeImageService::BINARY_NOT_FOUND,

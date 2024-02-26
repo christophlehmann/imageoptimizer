@@ -14,11 +14,9 @@ use TYPO3\CMS\Reports\StatusProviderInterface;
 
 class StatusReport implements StatusProviderInterface
 {
-    private ExtensionConfiguration $extensionConfiguration;
-
-    public function __construct(ExtensionConfiguration $extensionConfiguration)
-    {
-        $this->extensionConfiguration = $extensionConfiguration;
+    public function __construct(
+        private readonly ExtensionConfiguration $extensionConfiguration
+    ) {
     }
 
     public function getLabel(): string
