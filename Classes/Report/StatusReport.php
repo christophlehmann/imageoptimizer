@@ -1,6 +1,7 @@
 <?php
-namespace Lemming\Imageoptimizer;
+namespace Lemming\Imageoptimizer\Report;
 
+use Lemming\Imageoptimizer\OptimizeImageService;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\CommandUtility;

@@ -10,6 +10,9 @@ services:
   Lemming\Imageoptimizer\OptimizeImageService:
     public: true
 
+  Lemming\Imageoptimizer\Report\StatusReport:
+    autoconfigure: true
+
   Lemming\Imageoptimizer\EventListener\BeforeFileAdded:
     tags:
       - name: event.listener
