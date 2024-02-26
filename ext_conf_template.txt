@@ -8,7 +8,7 @@ jpgOnProcessing = 0
 jpgParametersOnUpload = --strip-all %s
 # cat=jpg/Processing/2040; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
 jpgParametersOnProcessing = --strip-all %s
-# cat=jpg/check/2050; type=user[Lemming\Imageoptimizer\ConfigurationTest->testCommand]; label=Test commands
+# cat=jpg/check/2050; type=user[Lemming\Imageoptimizer\ExtensionConfiguration\ConfigurationTest->testCommand]; label=Test commands
 jpgCheck = jpg
 
 # cat=png/Binary/2100; type=string; label=Binary
@@ -21,7 +21,7 @@ pngOnProcessing = 0
 pngParametersOnUpload = -o2 %s
 # cat=png/Processing/2140; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
 pngParametersOnProcessing = -o2 %s
-# cat=png/check/2150; type=user[Lemming\Imageoptimizer\ConfigurationTest->testCommand]; label=Test commands
+# cat=png/check/2150; type=user[Lemming\Imageoptimizer\ExtensionConfiguration\ConfigurationTest->testCommand]; label=Test commands
 pngCheck = png
 
 # cat=gif/Binary/2200; type=string; label=Binary
@@ -34,7 +34,7 @@ gifOnProcessing = 0
 gifParametersOnUpload = --batch -O2 %s
 # cat=gif/Processing/2240; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
 gifParametersOnProcessing = --batch -O2 %s
-# cat=gif/check/2250; type=user[Lemming\Imageoptimizer\ConfigurationTest->testCommand]; label=Test commands
+# cat=gif/check/2250; type=user[Lemming\Imageoptimizer\ExtensionConfiguration\ConfigurationTest->testCommand]; label=Test commands
 gifCheck = gif
 
 # cat=svg/Binary/2300; type=string; label=Binary
@@ -43,5 +43,5 @@ svgBinary = svgo
 svgOnUpload = 0
 # cat=svg/Upload/2330; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
 svgParametersOnUpload = --pretty %s
-# cat=svg/check/2340; type=user[Lemming\Imageoptimizer\ConfigurationTest->testCommand]; label=Test commands
+# cat=svg/check/2340; type=user[Lemming\Imageoptimizer\ExtensionConfiguration\ConfigurationTest->testCommand]; label=Test commands
 svgCheck = svg
