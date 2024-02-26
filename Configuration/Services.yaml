@@ -7,9 +7,6 @@ services:
   Lemming\Imageoptimizer\:
     resource: '../Classes/*'
 
-  Lemming\Imageoptimizer\OptimizeImageService:
-    public: true
-
   Lemming\Imageoptimizer\Report\StatusReport:
     autoconfigure: true
 

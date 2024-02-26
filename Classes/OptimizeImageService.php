@@ -20,9 +20,9 @@ class OptimizeImageService implements LoggerAwareInterface
 
     private ExtensionConfiguration $extensionConfiguration;
 
-    public function __construct(ExtensionConfiguration $extensionConfiguration)
+    public function __construct()
     {
-        $this->extensionConfiguration = $extensionConfiguration;
+        $this->extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
     }
 
     /**
