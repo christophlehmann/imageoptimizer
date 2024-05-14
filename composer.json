@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.42",
-        "phpstan/phpstan": "^1.10"
+        "phpstan/phpstan": "^1.11"
     },
     "replace": {
         "typo3-ter/imageoptimizer": "self.version"
