@@ -16,7 +16,7 @@
         "typo3/cms-reports": "^12.4"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.43",
+        "ergebnis/composer-normalize": "^2.44",
         "phpstan/phpstan": "^1.12"
     },
     "replace": {
