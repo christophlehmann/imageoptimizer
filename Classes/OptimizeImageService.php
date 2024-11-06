@@ -19,6 +19,9 @@ class OptimizeImageService implements LoggerAwareInterface
 
     private string $command;
 
+    /**
+     * @var array<int, string>
+     */
     private array $output = [];
 
     private ExtensionConfiguration $extensionConfiguration;
@@ -116,6 +119,9 @@ class OptimizeImageService implements LoggerAwareInterface
         return $this->command;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getOutput(): array
     {
         return $this->output;

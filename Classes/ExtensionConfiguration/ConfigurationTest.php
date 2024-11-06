@@ -31,9 +31,12 @@ class ConfigurationTest
         $this->flashMessageRenderer = GeneralUtility::makeInstance(BootstrapRenderer::class);
     }
 
+    /**
+     * @param array<string, string> $params
+     */
     public function testCommand(array $params): string
     {
-        $fileExtension = (string) $params['fieldValue'];
+        $fileExtension = $params['fieldValue'];
         $messageQueue = $this->flashMessageService->getMessageQueueByIdentifier();
 
         foreach ([false, true] as $fileIsUploaded) {

@@ -14,5 +14,3 @@ parameters:
 
     paths:
         - Classes
-
-    checkMissingIterableValueType: false
