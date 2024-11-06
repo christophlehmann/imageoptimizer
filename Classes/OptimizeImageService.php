@@ -99,7 +99,7 @@ class OptimizeImageService implements LoggerAwareInterface
                 [
                     'file' => $file,
                     'fileExtension' => $extension,
-                    'fileisUploaded' => $fileIsUploaded ? 1 : 0,
+                    'fileIsUploaded' => $fileIsUploaded ? 1 : 0,
                     'command' => $this->command,
                     'returnValue' => $returnValue,
                     'output' => $this->output,
