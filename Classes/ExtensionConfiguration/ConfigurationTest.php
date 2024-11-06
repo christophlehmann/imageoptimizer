@@ -21,6 +21,9 @@ class ConfigurationTest
 
     private readonly BootstrapRenderer $flashMessageRenderer;
 
+    /**
+     * DI does NOT work in Install Tool context!
+     */
     public function __construct()
     {
         $this->service = GeneralUtility::makeInstance(OptimizeImageService::class);
@@ -30,11 +33,11 @@ class ConfigurationTest
 
     public function testCommand(array $params): string
     {
-        $fileExtension = (string)$params['fieldValue'];
+        $fileExtension = (string) $params['fieldValue'];
         $messageQueue = $this->flashMessageService->getMessageQueueByIdentifier();
 
         foreach ([false, true] as $fileIsUploaded) {
-            if ($fileExtension === 'svg' && !$fileIsUploaded) {
+            if ($fileExtension === 'svg' && ! $fileIsUploaded) {
                 continue;
             }
 
@@ -48,12 +51,7 @@ class ConfigurationTest
             copy($file, $temporaryFile);
 
             try {
-                $returnValue = $this->service->process(
-                    $temporaryFile,
-                    $fileExtension,
-                    $fileIsUploaded,
-                    true
-                );
+                $returnValue = $this->service->process($temporaryFile, $fileExtension, $fileIsUploaded, true);
 
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
@@ -65,11 +63,7 @@ class ConfigurationTest
                 $message = GeneralUtility::makeInstance(
                     FlashMessage::class,
                     OptimizeImageService::BINARY_NOT_FOUND,
-                    sprintf(
-                        $header,
-                        strtoupper($fileExtension),
-                        $fileIsUploaded ? 'on Upload' : ''
-                    ),
+                    sprintf($header, strtoupper($fileExtension), $fileIsUploaded ? 'on Upload' : ''),
                     ContextualFeedbackSeverity::ERROR
                 );
             }

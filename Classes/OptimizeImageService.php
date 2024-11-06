@@ -23,6 +23,9 @@ class OptimizeImageService implements LoggerAwareInterface
 
     private ExtensionConfiguration $extensionConfiguration;
 
+    /**
+     * DI does NOT work in Install Tool context!
+     */
     public function __construct()
     {
         $this->extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
@@ -30,8 +33,6 @@ class OptimizeImageService implements LoggerAwareInterface
 
     /**
      * Perform image optimization
-
-     * @throws BinaryNotFoundException
      */
     public function process(
         string $file,
@@ -41,7 +42,7 @@ class OptimizeImageService implements LoggerAwareInterface
     ): bool {
         $this->reset();
 
-        if (!file_exists($file)) {
+        if (! file_exists($file)) {
             return false;
         }
 
@@ -60,30 +61,30 @@ class OptimizeImageService implements LoggerAwareInterface
 
         $when = $fileIsUploaded === true ? 'Upload' : 'Processing';
         $on = $extension . 'On' . $when;
-        if (!isset($configuration[$on])) {
+        if (! isset($configuration[$on])) {
             return false;
         }
 
-        if ((bool)$configuration[$on] === false && $testMode === false) {
+        if ((bool) $configuration[$on] === false && $testMode === false) {
             return false;
         }
 
         $binaryName = $configuration[$extension . 'Binary'];
         $binary = CommandUtility::getCommand(escapeshellcmd($binaryName));
 
-        if (!is_string($binary)) {
-            if (!$testMode) {
+        if (! is_string($binary)) {
+            if (! $testMode) {
                 $this->logger->log(LogLevel::ERROR, self::BINARY_NOT_FOUND, [
                     'file' => $file,
                     'fileExtension' => $extension,
-                    'binary' => $binaryName
+                    'binary' => $binaryName,
                 ]);
             }
             throw new BinaryNotFoundException('Binary ' . $binaryName . ' not found', 1488631746);
         }
 
         $parametersOn = $extension . 'ParametersOn' . $when;
-        $parameters = (string)$configuration[$parametersOn];
+        $parameters = (string) $configuration[$parametersOn];
         $parameters = (string) preg_replace('/[^A-Za-z0-9-%: =]/', '', $parameters);
         $parameters = (string) preg_replace('/%s/', escapeshellarg($file), $parameters);
 
@@ -91,7 +92,7 @@ class OptimizeImageService implements LoggerAwareInterface
         $returnValue = 0;
         CommandUtility::exec($this->command, $this->output, $returnValue);
         $executionWasSuccessful = $returnValue === 0;
-        if (!$testMode) {
+        if (! $testMode) {
             $this->logger->log(
                 $executionWasSuccessful ? LogLevel::INFO : LogLevel::ERROR,
                 $executionWasSuccessful ? 'Optimization was successful' : 'Optimization failed',
@@ -101,19 +102,13 @@ class OptimizeImageService implements LoggerAwareInterface
                     'fileisUploaded' => $fileIsUploaded ? 1 : 0,
                     'command' => $this->command,
                     'returnValue' => $returnValue,
-                    'output' => $this->output
+                    'output' => $this->output,
                 ]
             );
         }
         GeneralUtility::fixPermissions($file);
 
         return $executionWasSuccessful;
-    }
-
-    protected function reset(): void
-    {
-        $this->command = '';
-        $this->output = [];
     }
 
     public function getCommand(): string
@@ -124,5 +119,11 @@ class OptimizeImageService implements LoggerAwareInterface
     public function getOutput(): array
     {
         return $this->output;
+    }
+
+    protected function reset(): void
+    {
+        $this->command = '';
+        $this->output = [];
     }
 }
