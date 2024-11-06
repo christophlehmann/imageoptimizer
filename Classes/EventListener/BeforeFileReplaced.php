@@ -10,10 +10,6 @@ class BeforeFileReplaced extends AbstractEventListener
 {
     public function __invoke(BeforeFileReplacedEvent $event): void
     {
-        $this->getService()->process(
-            $event->getLocalFilePath(),
-            $event->getFile()->getExtension(),
-            true
-        );
+        $this->getService()->process($event->getLocalFilePath(), $event->getFile()->getExtension(), true);
     }
 }

@@ -11,7 +11,7 @@ class AfterFileProcessing extends AbstractEventListener
 {
     public function __invoke(AfterFileProcessingEvent $event): void
     {
-        if ($event->getProcessedFile()->isUpdated() && !$event->getProcessedFile()->usesOriginalFile()) {
+        if ($event->getProcessedFile()->isUpdated() && ! $event->getProcessedFile()->usesOriginalFile()) {
             $this->getService()->process(
                 Environment::getPublicPath() . '/' . ltrim((string) $event->getProcessedFile()->getPublicUrl(), '/'),
                 $event->getProcessedFile()->getExtension()

@@ -18,7 +18,8 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.44",
         "phpstan/phpstan": "^1.12",
-        "ssch/typo3-rector": "^2.11"
+        "ssch/typo3-rector": "^2.11",
+        "symplify/easy-coding-standard": "^12.3"
     },
     "replace": {
         "typo3-ter/imageoptimizer": "self.version"
