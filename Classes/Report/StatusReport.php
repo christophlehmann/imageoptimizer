@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Lemming\Imageoptimizer\Report;
 
 use Lemming\Imageoptimizer\OptimizeImageService;
