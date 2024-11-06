@@ -51,9 +51,14 @@
         "lint-php": "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
         "prepare-release": [
             "rm -rf .github",
+            "rm -rf .editorconfig",
+            "rm -rf .gitattributes",
             "rm -rf .gitignore",
+            "rm -rf .phpstorm.meta.php",
             "rm -rf Documentation",
-            "rm -rf phpstan.neon"
+            "rm -rf ecs.php",
+            "rm -rf phpstan.neon",
+            "rm -rf rector.php"
         ]
     }
 }
