@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Lemming\Imageoptimizer\EventListener;
 
 use TYPO3\CMS\Core\Resource\Event\BeforeFileReplacedEvent;

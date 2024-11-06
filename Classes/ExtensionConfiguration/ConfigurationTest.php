@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Lemming\Imageoptimizer\ExtensionConfiguration;
 
 use Lemming\Imageoptimizer\BinaryNotFoundException;
