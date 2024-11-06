@@ -22,6 +22,8 @@
 *.sql text eol=lf
 *.txt text eol=lf
 
-/.* export-ignore
 /Documentation export-ignore
+/.* export-ignore
+/ecs.php export-ignore
 /phpstan.neon export-ignore
+/rector.php export-ignore
