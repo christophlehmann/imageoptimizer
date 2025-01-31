@@ -11,7 +11,7 @@ jobs:
       matrix:
         env:
           # See version matrix @ https://typo3.org/cms/roadmap
-          - { php: 8.2, typo3: 12.4 }
+          - { php: 8.2, typo3: 13.4 }
 
     env: ${{ matrix.env }}
 
