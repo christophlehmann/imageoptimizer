@@ -12,10 +12,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Reports\Status;
 use TYPO3\CMS\Reports\StatusProviderInterface;
 
-class StatusReport implements StatusProviderInterface
+readonly class StatusReport implements StatusProviderInterface
 {
     public function __construct(
-        private readonly ExtensionConfiguration $extensionConfiguration
+        private ExtensionConfiguration $extensionConfiguration
     ) {
     }
 
