@@ -37,6 +37,9 @@ return static function (ECSConfig $ecsConfig): void {
     $ecsConfig->ruleWithConfiguration(NoSuperfluousPhpdocTagsFixer::class, [
         'allow_mixed' => true,
     ]);
+    $ecsConfig->ruleWithConfiguration(LineLengthFixer::class, [
+        LineLengthFixer::INLINE_SHORT_LINES => false,
+    ]);
 
     $ecsConfig->rule(NoUnusedImportsFixer::class);
     $ecsConfig->rule(ArraySyntaxFixer::class);
