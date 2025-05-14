@@ -30,7 +30,7 @@ class StatusReport implements StatusProviderInterface
     public function getStatus(): array
     {
         $configuration = $this->extensionConfiguration->get('imageoptimizer');
-        $extensions = ['jpg', 'png', 'gif', 'svg'];
+        $extensions = ['jpg', 'png', 'gif', 'svg', 'webp'];
         $status = [];
         foreach ($extensions as $extension) {
             $binary = escapeshellcmd($configuration[$extension . 'Binary']);
