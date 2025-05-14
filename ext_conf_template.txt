@@ -45,3 +45,16 @@ svgOnUpload = 0
 svgParametersOnUpload = --pretty %s
 # cat=svg/check/2340; type=user[Lemming\Imageoptimizer\ExtensionConfiguration\ConfigurationTest->testCommand]; label=Test commands
 svgCheck = svg
+
+# cat=webp/Binary/2400; type=string; label=Binary
+webpBinary = cwebp
+# cat=webp/Upload/2410; type=boolean; label=Activate for upload
+webpOnUpload = 0
+# cat=webp/Processing/2420; type=boolean; label=Activate for processing (after crop,scale, ...)
+webpOnProcessing = 0
+# cat=webp/Upload/2430; type=string; label=Parameters for processing on upload (%s will be replaced with filepath)
+webpParametersOnUpload = %s -o %s
+# cat=webp/Processing/2440; type=string; label=Parameters for processing after crop,scale,... (%s will be replaced with filepath)
+webpParametersOnProcessing = %s -o %s
+# cat=webp/check/2450; type=user[Lemming\Imageoptimizer\ExtensionConfiguration\ConfigurationTest->testCommand]; label=Test commands
+webpCheck = webp
