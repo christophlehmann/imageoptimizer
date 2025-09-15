@@ -19,7 +19,7 @@
         "ergebnis/composer-normalize": "^2.48",
         "phpstan/phpstan": "^1.12",
         "ssch/typo3-rector": "^2.12",
-        "symplify/easy-coding-standard": "^12.5",
+        "symplify/easy-coding-standard": "^12.6",
         "typo3/cms-backend": "^13.4",
         "typo3/cms-frontend": "^13.4"
     },
