@@ -9,11 +9,9 @@ jobs:
 
     strategy:
       matrix:
-        env:
-          # See version matrix @ https://typo3.org/cms/roadmap
-          - { php: 8.2, typo3: 13.4 }
-
-    env: ${{ matrix.env }}
+        # See version matrix @ https://typo3.org/cms/roadmap
+        typo3: [ '^13' ]
+        php: [ '8.2', '8.3', '8.4' ]
 
     steps:
       - uses: actions/checkout@v5
@@ -21,7 +19,7 @@ jobs:
       - name: Set up PHP Version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.env.php }}
+          php-version: ${{ matrix.php }}
           tools: composer:v2
 
       - name: Validate composer.json and composer.lock
