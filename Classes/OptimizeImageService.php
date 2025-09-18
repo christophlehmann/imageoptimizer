@@ -39,7 +39,7 @@ class OptimizeImageService implements LoggerAwareInterface
      */
     public function process(
         string $file,
-        string $extension = null,
+        ?string $extension = null,
         bool $fileIsUploaded = false,
         bool $testMode = false
     ): bool {
