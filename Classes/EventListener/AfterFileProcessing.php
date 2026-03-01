@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent;
 
-#[AsEventListener(identifier: 'ext-imageoptimizer/after-file-processing')]
+#[AsEventListener(identifier: 'imageoptimizer/after-file-processing')]
 class AfterFileProcessing extends AbstractEventListener
 {
     public function __invoke(AfterFileProcessingEvent $event): void
