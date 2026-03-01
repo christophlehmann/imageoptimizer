@@ -57,7 +57,7 @@ class OptimizeImageService implements LoggerAwareInterface
                 $extension = $pathInfo['extension'];
             }
         }
-        $extension = strtolower($extension);
+        $extension = strtolower((string) $extension);
         if ($extension === 'jpeg') {
             $extension = 'jpg';
         }

@@ -16,12 +16,16 @@
         "typo3/cms-reports": "^13.4"
     },
     "require-dev": {
+        "a9f/fractor-composer-json": "^0.5.9",
+        "a9f/typo3-fractor": "^0.5.9",
         "ergebnis/composer-normalize": "^2.50",
-        "phpstan/phpstan": "^1.12",
-        "ssch/typo3-rector": "^2.12",
+        "phpstan/phpstan": "^2.1.31",
+        "ssch/typo3-rector": "^3.7.0",
         "symplify/easy-coding-standard": "^13.0",
         "typo3/cms-backend": "^13.4",
-        "typo3/cms-frontend": "^13.4"
+        "typo3/cms-fluid": "^13.4",
+        "typo3/cms-frontend": "^13.4",
+        "typo3/cms-install": "^13.4"
     },
     "replace": {
         "typo3-ter/imageoptimizer": "self.version"
@@ -33,6 +37,7 @@
     },
     "config": {
         "allow-plugins": {
+            "a9f/fractor-extension-installer": true,
             "ergebnis/composer-normalize": true,
             "typo3/class-alias-loader": true,
             "typo3/cms-composer-installers": true
@@ -49,8 +54,20 @@
         }
     },
     "scripts": {
+        "ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
+        "ci:composer:psr-verify": "@composer dumpautoload --optimize --strict-psr --no-plugins",
+        "ci:php:ecs": ".Build/bin/ecs --config=Build/ecs/ecs.php",
+        "ci:php:fractor": ".Build/bin/fractor process --config Build/fractor/fractor.php --dry-run",
+        "ci:php:rector": ".Build/bin/rector process --config Build/rector/rector.php --dry-run",
+        "ci:php:stan": ".Build/bin/phpstan analyse -c Build/phpstan/phpstan.neon --no-progress --no-interaction --memory-limit 4G",
         "fix:composer:normalize": "@composer normalize --no-check-lock",
-        "lint-php": "find *.php Classes Configuration -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+        "fix:php:ecs": ".Build/bin/ecs --config=Build/ecs/ecs.php --fix",
+        "fix:php:fractor": [
+            ".Build/bin/fractor process --config Build/fractor/fractor.php",
+            "@fix:composer:normalize"
+        ],
+        "fix:php:rector": ".Build/bin/rector process --config Build/rector/rector.php",
+        "phpstan:baseline": ".Build/bin/phpstan analyse -c Build/phpstan/phpstan.neon --no-progress --no-interaction --memory-limit 4G --generate-baseline=Build/phpstan/phpstan-baseline.neon --allow-empty-baseline",
         "prepare-release": [
             "rm -rf .github",
             "rm -rf .editorconfig",
