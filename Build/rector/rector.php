@@ -37,7 +37,7 @@ return static function (RectorConfig $rectorConfig): void {
         // TYPO3 Sets
         Typo3SetList::CODE_QUALITY,
         Typo3SetList::GENERAL,
-        Typo3LevelSetList::UP_TO_TYPO3_13,
+        Typo3LevelSetList::UP_TO_TYPO3_14,
     ]);
     $rectorConfig->phpstanConfig(Typo3Option::PHPSTAN_FOR_RECTOR_PATH);
     $rectorConfig->rules([
@@ -46,7 +46,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
     $rectorConfig->ruleWithConfiguration(ExtEmConfRector::class, [
         ExtEmConfRector::PHP_VERSION_CONSTRAINT => '8.2.0-8.4.99',
-        ExtEmConfRector::TYPO3_VERSION_CONSTRAINT => '13.4.0-13.4.99',
+        ExtEmConfRector::TYPO3_VERSION_CONSTRAINT => '14.1.0-14.3.99',
         ExtEmConfRector::ADDITIONAL_VALUES_TO_BE_REMOVED => [],
     ]);
     $rectorConfig->importNames();
