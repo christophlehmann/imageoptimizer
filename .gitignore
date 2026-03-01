@@ -1,4 +1,7 @@
-.Build/
-config/
-var/
-composer.lock
+/.Build/
+/.cache/
+/.idea/
+/config/
+/var/
+/.env
+/composer.lock

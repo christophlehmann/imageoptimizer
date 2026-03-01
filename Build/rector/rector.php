@@ -15,37 +15,44 @@ use Ssch\TYPO3Rector\Configuration\Typo3Option;
 use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
 use Ssch\TYPO3Rector\Set\Typo3SetList;
 
-return RectorConfig::configure()
-    ->withPaths([
-        __DIR__ . '/Classes',
-        __DIR__ . '/ext_emconf.php',
-    ])
-    ->withPhpVersion(PhpVersion::PHP_82)
-    ->withSets([
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->paths([
+        __DIR__ . '/../../Classes',
+        __DIR__ . '/../../ext_emconf.php',
+    ]);
+    $rectorConfig->phpVersion(PhpVersion::PHP_82);
+    $rectorConfig->sets([
+        // Rector sets
         LevelSetList::UP_TO_PHP_82,
         SetList::CODE_QUALITY,
-        SetList::CODING_STYLE,
         SetList::DEAD_CODE,
-        SetList::STRICT_BOOLEANS,
+        SetList::CODING_STYLE,
+        //SetList::STRICT_BOOLEANS,
+        //SetList::NAMING,
+        SetList::PRIVATIZATION,
         SetList::TYPE_DECLARATION,
+        SetList::EARLY_RETURN,
         SetList::INSTANCEOF,
+
+        // TYPO3 Sets
         Typo3SetList::CODE_QUALITY,
         Typo3SetList::GENERAL,
         Typo3LevelSetList::UP_TO_TYPO3_13,
-    ])
-    ->withConfiguredRule(ExtEmConfRector::class, [
+    ]);
+    $rectorConfig->phpstanConfig(Typo3Option::PHPSTAN_FOR_RECTOR_PATH);
+    $rectorConfig->rules([
+        AddVoidReturnTypeWhereNoReturnRector::class,
+        ConvertImplicitVariablesToExplicitGlobalsRector::class,
+    ]);
+    $rectorConfig->ruleWithConfiguration(ExtEmConfRector::class, [
         ExtEmConfRector::PHP_VERSION_CONSTRAINT => '8.2.0-8.4.99',
         ExtEmConfRector::TYPO3_VERSION_CONSTRAINT => '13.4.0-13.4.99',
         ExtEmConfRector::ADDITIONAL_VALUES_TO_BE_REMOVED => [],
-    ])
-    ->withRules([
-        ConvertImplicitVariablesToExplicitGlobalsRector::class,
-        AddVoidReturnTypeWhereNoReturnRector::class,
-    ])
-    # To have a better analysis from PHPStan, we teach it here some more things
-    ->withPHPStanConfigs([Typo3Option::PHPSTAN_FOR_RECTOR_PATH])
-    ->withImportNames(true, true, false, true)
-    ->withSkip([
+    ]);
+    $rectorConfig->importNames();
+    $rectorConfig->importShortClasses(false);
+    $rectorConfig->skip([
         SimplifyBoolIdenticalTrueRector::class,
         NewlineAfterStatementRector::class,
     ]);
+};

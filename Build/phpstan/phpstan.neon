@@ -1,0 +1,20 @@
+includes:
+    - phpstan-baseline.neon
+    #- ../../.Build/vendor/friendsoftypo3/phpstan-typo3/extension.neon
+
+parameters:
+  # Use local .cache dir instead of /tmp
+  tmpDir: ../../.cache/phpstan
+
+  parallel:
+      # Don't be overly greedy on machines with more CPU's to be a good neighbor especially on CI
+      maximumNumberOfProcesses: 5
+
+  level: 6
+
+  bootstrapFiles:
+    - phpstan-constants.php
+
+  paths:
+    - ../../Classes
+    - ../../Configuration

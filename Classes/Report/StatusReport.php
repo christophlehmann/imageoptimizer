@@ -16,8 +16,7 @@ readonly class StatusReport implements StatusProviderInterface
 {
     public function __construct(
         private ExtensionConfiguration $extensionConfiguration
-    ) {
-    }
+    ) {}
 
     public function getLabel(): string
     {
