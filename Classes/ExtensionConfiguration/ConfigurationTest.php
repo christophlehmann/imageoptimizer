@@ -45,12 +45,8 @@ class ConfigurationTest
             }
 
             $header = sprintf('%s%s', strtoupper($fileExtension), $fileIsUploaded ? ' on Upload' : '');
-            $file = sprintf(
-                '%s/Resources/Private/Images/example.%s',
-                ExtensionManagementUtility::extPath('imageoptimizer'),
-                $fileExtension
-            );
-            $temporaryFile = GeneralUtility::tempnam('imageoptimizer', $fileExtension);
+            $file = ExtensionManagementUtility::extPath('imageoptimizer') . 'Resources/Private/Images/example.' . $fileExtension;
+            $temporaryFile = GeneralUtility::tempnam('imageoptimizer', '.' . $fileExtension);
             copy($file, $temporaryFile);
 
             try {
