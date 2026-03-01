@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/christophlehmann/imageoptimizer/v/stable)](https://packagist.org/packages/christophlehmann/imageoptimizer)
 [![Total Downloads](https://poser.pugx.org/christophlehmann/imageoptimizer/downloads)](https://packagist.org/packages/christophlehmann/imageoptimizer)
 [![License](https://poser.pugx.org/christophlehmann/imageoptimizer/license)](https://packagist.org/packages/christophlehmann/imageoptimizer)
-[![TYPO3](https://img.shields.io/badge/TYPO3-13-orange.svg)](https://get.typo3.org/version/13)
+[![TYPO3](https://img.shields.io/badge/TYPO3-14-orange.svg)](https://get.typo3.org/version/14)
 
 Lossless image optimization.
 Process jpg/png/gif/svg/webp images with binaries and parameters of your choice.

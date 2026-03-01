@@ -12,8 +12,8 @@
         "progressive"
     ],
     "require": {
-        "typo3/cms-core": "^13.4",
-        "typo3/cms-reports": "^13.4"
+        "typo3/cms-core": "^14.1",
+        "typo3/cms-reports": "^14.1"
     },
     "require-dev": {
         "a9f/fractor-composer-json": "^0.5.9",
@@ -22,10 +22,11 @@
         "phpstan/phpstan": "^2.1.31",
         "ssch/typo3-rector": "^3.7.0",
         "symplify/easy-coding-standard": "^13.0",
-        "typo3/cms-backend": "^13.4",
-        "typo3/cms-fluid": "^13.4",
-        "typo3/cms-frontend": "^13.4",
-        "typo3/cms-install": "^13.4"
+        "typo3/cms-backend": "^14.1",
+        "typo3/cms-filelist": "^14.1",
+        "typo3/cms-fluid": "^14.1",
+        "typo3/cms-frontend": "^14.1",
+        "typo3/cms-install": "^14.1"
     },
     "replace": {
         "typo3-ter/imageoptimizer": "self.version"
