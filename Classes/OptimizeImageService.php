@@ -53,7 +53,7 @@ class OptimizeImageService implements LoggerAwareInterface
 
         if ($extension === null) {
             $pathInfo = pathinfo($file);
-            if ($pathInfo['extension'] !== null) {
+            if (isset($pathInfo['extension'])) {
                 $extension = $pathInfo['extension'];
             }
         }
