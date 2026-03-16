@@ -16,7 +16,7 @@
         "typo3/cms-reports": "^14.1"
     },
     "require-dev": {
-        "a9f/fractor-composer-json": "^0.5.9",
+        "a9f/fractor-composer-json": "^0.5.10",
         "a9f/typo3-fractor": "^0.5.10",
         "ergebnis/composer-normalize": "^2.50",
         "phpstan/phpstan": "^2.1.40",
