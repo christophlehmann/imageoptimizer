@@ -8,6 +8,7 @@ use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
+use Rector\TypeDeclaration\Rector\StmtsAwareInterface\SafeDeclareStrictTypesRector;
 use Rector\ValueObject\PhpVersion;
 use Ssch\TYPO3Rector\CodeQuality\General\ConvertImplicitVariablesToExplicitGlobalsRector;
 use Ssch\TYPO3Rector\CodeQuality\General\ExtEmConfRector;
@@ -54,5 +55,8 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip([
         SimplifyBoolIdenticalTrueRector::class,
         NewlineAfterStatementRector::class,
+        SafeDeclareStrictTypesRector::class => [
+            __DIR__ . '/../../ext_emconf.php',
+        ],
     ]);
 };
