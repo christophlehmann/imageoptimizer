@@ -21,7 +21,7 @@
         "ergebnis/composer-normalize": "^2.51",
         "phpstan/phpstan": "^2.1.54",
         "ssch/typo3-rector": "^3.14.1",
-        "symplify/easy-coding-standard": "^13.0",
+        "symplify/easy-coding-standard": "^13.1",
         "typo3/cms-backend": "^14.1",
         "typo3/cms-filelist": "^14.1",
         "typo3/cms-fluid": "^14.1",
