@@ -36,9 +36,7 @@ return static function (ECSConfig $ecsConfig): void {
         SetList::CONTROL_STRUCTURES,
         SetList::DOCBLOCK,
         SetList::NAMESPACES,
-        SetList::PHPUNIT,
         SetList::SPACES,
-        SetList::STRICT,
     ]);
 
     $ecsConfig->ruleWithConfiguration(GeneralPhpdocAnnotationRemoveFixer::class, [

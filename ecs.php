@@ -23,7 +23,7 @@ return static function (ECSConfig $ecsConfig): void {
         __DIR__ . '/Configuration',
         __DIR__ . '/Resources',
         __DIR__ . '/ecs.php',
-        __DIR__ . '/rector.php',
+        __DIR__ . '/Build/rector/rector.php',
     ]);
 
     $ecsConfig->skip([MethodChainingIndentationFixer::class, MethodChainingNewlineFixer::class]);
