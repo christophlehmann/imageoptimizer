@@ -20,7 +20,7 @@
         "a9f/typo3-fractor": "^0.5.10",
         "ergebnis/composer-normalize": "^2.52",
         "phpstan/phpstan": "^2.2.2",
-        "ssch/typo3-rector": "^3.14.1",
+        "ssch/typo3-rector": "^3.14.2",
         "symplify/easy-coding-standard": "^13.2",
         "typo3/cms-backend": "^14.1",
         "typo3/cms-filelist": "^14.1",
