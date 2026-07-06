@@ -57,12 +57,12 @@
     "scripts": {
         "ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
         "ci:composer:psr-verify": "@composer dumpautoload --optimize --strict-psr --no-plugins",
-        "ci:php:ecs": ".Build/bin/ecs --config=Build/ecs/ecs.php",
+        "ci:php:ecs": ".Build/bin/ecs check --config=Build/ecs/ecs.php",
         "ci:php:fractor": ".Build/bin/fractor process --config Build/fractor/fractor.php --dry-run",
         "ci:php:rector": ".Build/bin/rector process --config Build/rector/rector.php --dry-run",
         "ci:php:stan": ".Build/bin/phpstan analyse -c Build/phpstan/phpstan.neon --no-progress --no-interaction --memory-limit 4G",
         "fix:composer:normalize": "@composer normalize --no-check-lock",
-        "fix:php:ecs": ".Build/bin/ecs --config=Build/ecs/ecs.php --fix",
+        "fix:php:ecs": ".Build/bin/ecs check --config=Build/ecs/ecs.php --fix",
         "fix:php:fractor": [
             ".Build/bin/fractor process --config Build/fractor/fractor.php",
             "@fix:composer:normalize"
