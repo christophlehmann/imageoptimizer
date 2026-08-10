@@ -19,7 +19,7 @@
         "a9f/fractor-composer-json": "^0.5.11",
         "a9f/typo3-fractor": "^0.5.11",
         "ergebnis/composer-normalize": "^2.52",
-        "phpstan/phpstan": "^2.2.7",
+        "phpstan/phpstan": "^2.2.8",
         "ssch/typo3-rector": "^3.14.4",
         "symplify/easy-coding-standard": "^13.2",
         "typo3/cms-backend": "^14.1",
